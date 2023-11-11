@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logClient } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
+import { ChoiceSwitch } from "../../common/inputSwitch/Input ";
+
 
 export const Login = () => {
 
@@ -21,11 +23,17 @@ export const Login = () => {
 
     const [error, setError] = useState("")
 
+    const [checked, setChecked] = useState(false)
+
     const functionHandler = (e) => {
         setAuth((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
-        }));
+        }))
+    }
+
+    const switchHandler = (e) => {
+        setChecked(e.target.checked)
     }
 
     const errorCheck = (e) => {
@@ -63,17 +71,18 @@ export const Login = () => {
                     if (response.error) {
                         setError("Invalid Email or Password")
                     } else {
-                        localStorage.setItem ("token", response.data.token)
-                        
+                        localStorage.setItem("token", response.data.token)
+
                         setTimeout(() => {
-                            navigate("/");
+                            navigate(checked ? "/worker" : "/");
+
                         }, 500);
                     }
                 }
             )
             .catch((error) => {
                 console.log(error);
-                    setError("Invalid Email or Password");
+                setError("Invalid Email or Password");
             });
     }
 
@@ -81,12 +90,19 @@ export const Login = () => {
         <div className="global">
             <div>
                 <div className="loginDesign">
+                    <div className="checked">
+                    <ChoiceSwitch
+                        checked={checked}
+                        onChange={switchHandler}
+                    />
+                    </div>
+                    <div className="space"></div>
                     <CustomInput
                         design={`inputDesign ${authError.emailError !== "" ? 'inputDesignError' : ''}`}
                         type={"email"}
                         name={"email"}
                         placeholder={""}
-                        value={auth.email}
+                        //value={auth.email}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
@@ -96,7 +112,7 @@ export const Login = () => {
                         type={"password"}
                         name={"password"}
                         placeholder={""}
-                        value={auth.password}
+                        //value={auth.password}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />

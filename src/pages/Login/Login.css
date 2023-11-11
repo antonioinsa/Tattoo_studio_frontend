@@ -22,10 +22,24 @@
     background-color: rgb(26, 104, 132);
 }
 
+.checked{
+
+    width: 16vw;
+
+    display: flex;
+    justify-content: end;
+}
+
+.space {
+
+    height: 1.5em;
+    width: 20vw;
+}
+
 .errorMsg {
+
     color: rgb(255, 0, 0);
     font-weight: bolder;
-
 }
 
 .buttonSubmit {
