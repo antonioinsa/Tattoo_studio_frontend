@@ -7,10 +7,12 @@ export const logClient = async (body) => {
     
     return await axios.post(`http://localhost:3000/client/login`, body);
 
+    
 }
 
-export const registerUser = async (body) => {
+export const registerClient = async (body) => {
+    console.log(body);
     //SIMULACRO DE CONEXION REAL A API
-    // return await axios.post(`elendpointdemipreciosobackend`, body);
-    return "todo ha ido bien"
+    return await axios.post(`http://localhost:3000/client/register`, body);
+    //return "todo ha ido bien"
 }

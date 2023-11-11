@@ -1,3 +1,6 @@
+
+
+
 .inputDesign {
 
     height: 2em;
@@ -11,6 +14,6 @@
 
 .inputDesignError {
 
-    border: 0.2em red solid;
+    border: 0.2em rgb(0, 0, 0) solid;
 
 }

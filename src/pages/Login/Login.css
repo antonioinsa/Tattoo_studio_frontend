@@ -1,5 +1,4 @@
-.loginDesign {
-
+.global {
     height: 90vh;
     width: 100vw;
 
@@ -7,8 +6,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(171, 171, 223);
+}
+.loginDesign {
 
-    background-color: beige;
+    height: 35vh;
+    width: 20vw;
+    border-radius: 10%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(26, 104, 132);
+}
+
+.errorMsg {
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+
 }
 
 .buttonSubmit {
@@ -17,7 +34,7 @@
     width: 8em;
 
     border-radius: 1em;
-    background-color: crimson;
+    background-color: rgb(0, 0, 0);
     color: white;
     font-weight: bolder;
 
@@ -29,6 +46,6 @@
 .buttonSubmit:hover {
 
     transition: 0.4s;
-    background-color: lightcoral;
+    background-color: rgb(128, 121, 121);
     cursor: pointer;
 }
