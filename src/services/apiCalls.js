@@ -3,10 +3,9 @@ import axios from 'axios';
 export const logClient = async (body) => {
 
     console.log(body);
-
     
     return await axios.post(`http://localhost:3000/client/login`, body);
-
+    
     
 }
 

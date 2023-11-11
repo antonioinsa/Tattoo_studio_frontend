@@ -28,10 +28,6 @@ export const Login = () => {
         }));
     }
 
-    //   useEffect(()=>{
-    //     console.log(credenciales);
-    //   },[credenciales]);
-
     const errorCheck = (e) => {
 
         let error = "";
@@ -61,14 +57,14 @@ export const Login = () => {
 
         logClient(auth)
             .then(
-                (resultado) => {
-                    console.log(resultado);
+                (response) => {
+                    console.log(response);
 
-                    if (resultado.error) {
+                    if (response.error) {
                         setError("Invalid Email or Password")
                     } else {
-                        //Aqui guardaría el token........
-                        //Una vez guardado el token....nos vamos a home....
+                        localStorage.setItem ("token", response.data.token)
+                        
                         setTimeout(() => {
                             navigate("/");
                         }, 500);
