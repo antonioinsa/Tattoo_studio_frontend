@@ -8,7 +8,6 @@ export const ChoiceSwitch = () => {
       color="blue"
       labelPosition="left"
       label="Are You a worker"
-      font-color="red"
     />
   );
 }

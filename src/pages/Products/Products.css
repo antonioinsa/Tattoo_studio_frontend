@@ -1,0 +1,22 @@
+
+.productDesign {
+
+    height: 100vh;
+    width: 100vw;
+
+    background-color: beige;
+
+    
+}
+
+.characterRoster {
+
+    /* display: grid;
+    grid-template-columns:repeat(auto-fill, minmax(5em, 1fr));
+    gap: 1em; */
+    display: flex;
+    flex-wrap: wrap;
+
+
+
+}

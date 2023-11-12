@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { logClient } from "../../services/apiCalls";
+import { logClient, logWorker } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
 import { ChoiceSwitch } from "../../common/inputSwitch/Input ";
+import { Link } from 'react-router-dom';
 
 
 export const Login = () => {
@@ -63,27 +64,55 @@ export const Login = () => {
             }
         }
 
-        logClient(auth)
-            .then(
-                (response) => {
-                    console.log(response);
+        if (!checked) {
 
-                    if (response.error) {
-                        setError("Invalid Email or Password")
-                    } else {
-                        localStorage.setItem("token", response.data.token)
+            logClient(auth)
+                .then(
+                    (response) => {
+                        console.log(response);
 
-                        setTimeout(() => {
-                            navigate(checked ? "/worker" : "/");
+                        if (response.error) {
+                            setError("Invalid Email or Password")
+                        } else {
+                            localStorage.setItem("token", response.data.token)
 
-                        }, 500);
+                            setTimeout(() => {
+                                navigate("/");
+
+                            }, 500);
+                        }
                     }
-                }
-            )
-            .catch((error) => {
-                console.log(error);
-                setError("Invalid Email or Password");
-            });
+                )
+                .catch((error) => {
+                    console.log(error);
+                    setError("Invalid Email or Password");
+
+                });
+        } else {
+
+            logWorker(auth)
+                .then(
+                    (response) => {
+                        console.log(response);
+
+                        if (response.error) {
+                            setError("Invalid Email or Password")
+                        } else {
+                            localStorage.setItem("token", response.data.token)
+
+                            setTimeout(() => {
+                                navigate("/worker");
+
+                            }, 500);
+                        }
+                    }
+                )
+                .catch((error) => {
+                    console.log(error);
+                    setError("Invalid Email or Password");
+
+                });
+        }
     }
 
     return (
@@ -91,17 +120,17 @@ export const Login = () => {
             <div>
                 <div className="loginDesign">
                     <div className="checked">
-                    <ChoiceSwitch
-                        checked={checked}
-                        onChange={switchHandler}
-                    />
+                        <ChoiceSwitch
+                            checked={checked}
+                            onChange={switchHandler}
+                        />
                     </div>
                     <div className="space"></div>
                     <CustomInput
                         design={`inputDesign ${authError.emailError !== "" ? 'inputDesignError' : ''}`}
                         type={"email"}
                         name={"email"}
-                        placeholder={""}
+                        placeholder={"EMAIL"}
                         //value={auth.email}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
@@ -111,16 +140,20 @@ export const Login = () => {
                         design={`inputDesign ${authError.passwordError !== "" ? 'inputDesignError' : ''}`}
                         type={"password"}
                         name={"password"}
-                        placeholder={""}
+                        placeholder={"PASSWORD"}
                         //value={auth.password}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
                     <div className='errorMsg'>{authError.passwordError}</div>
+                    <div className='registerButton'>
+                        <Link to="/register">Register</Link>
+                    </div>
                     <div className='buttonSubmit' onClick={Submit}>Login</div>
                     <div className='errorMsg'>{error}</div>
                 </div>
             </div>
         </div>
+
     );
 };

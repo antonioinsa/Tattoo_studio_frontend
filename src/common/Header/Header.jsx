@@ -17,7 +17,7 @@ export const Header = () => {
             />
             <LinkButton
                 path={"/login"}
-                title={"Login"}
+                title={"Login/Register"}
             />
         </div>
     );

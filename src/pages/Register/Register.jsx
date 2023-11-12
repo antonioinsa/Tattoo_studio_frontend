@@ -72,10 +72,30 @@ export const Register = () => {
   return (
     <div className="registerDesign">
       <CustomInput
+        design={`inputDesign ${clientError.first_nameError !== "" ? 'inputDesignError' : ''}`}
+        type={"text"}
+        name={"first_name"}
+        placeholder={"FIRST NAME"}
+        // value={}
+        functionProp={functionHandler}
+        functionBlur={errorCheck}
+      />
+      <div className='errorMsg'>{clientError.first_nameError}</div>
+      <CustomInput
+        design={`inputDesign ${clientError.last_nameError !== "" ? 'inputDesignError' : ''}`}
+        type={"text"}
+        name={"last_name"}
+        placeholder={"LAST NAME"}
+        // value={}
+        functionProp={functionHandler}
+        functionBlur={errorCheck}
+      />
+      <div className='errorMsg'>{clientError.last_nameError}</div>
+      <CustomInput
         design={`inputDesign ${clientError.emailError !== "" ? 'inputDesignError' : ''}`}
         type={"email"}
         name={"email"}
-        placeholder={""}
+        placeholder={"EMAIL"}
         // value={}
         functionProp={functionHandler}
         functionBlur={errorCheck}
@@ -85,27 +105,17 @@ export const Register = () => {
         design={`inputDesign ${clientError.passwordError !== "" ? 'inputDesignError' : ''}`}
         type={"password"}
         name={"password"}
-        placeholder={""}
+        placeholder={"PASSWORD"}
         // value={}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
       <div className='errorMsg'>{clientError.passwordError}</div>
       <CustomInput
-        design={`inputDesign ${clientError.nameError !== "" ? 'inputDesignError' : ''}`}
-        type={"text"}
-        name={"name"}
-        placeholder={""}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.nameError}</div>
-      <CustomInput
         design={`inputDesign ${clientError.phoneError !== "" ? 'inputDesignError' : ''}`}
         type={"text"}
         name={"phone"}
-        placeholder={""}
+        placeholder={"PHONE"}
         // value={}
         functionProp={functionHandler}
         functionBlur={errorCheck}

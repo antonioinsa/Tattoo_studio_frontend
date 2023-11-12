@@ -6,11 +6,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(171, 171, 223);
+    background-color: rgb(198, 198, 239);
 }
 .loginDesign {
 
-    height: 35vh;
+    height: 40vh;
     width: 20vw;
     border-radius: 10%;
 
@@ -32,14 +32,8 @@
 
 .space {
 
-    height: 1.5em;
+    height: 1.5vh;
     width: 20vw;
-}
-
-.errorMsg {
-
-    color: rgb(255, 0, 0);
-    font-weight: bolder;
 }
 
 .buttonSubmit {
@@ -61,5 +55,27 @@
 
     transition: 0.4s;
     background-color: rgb(128, 121, 121);
+    cursor: pointer;
+}
+
+.errorMsg {
+
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+}
+
+.registerButton{
+    
+    height: 3vh;
+    width: 5vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8em;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
+    color: rgb(48, 40, 40);
     cursor: pointer;
 }
