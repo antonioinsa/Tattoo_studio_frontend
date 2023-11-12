@@ -40,88 +40,90 @@ export const Register = () => {
     error = validator(e.target.name, e.target.value);
 
     setClientError((prevState) => ({
-        ...prevState,
-        [e.target.name + 'Error']: error,
+      ...prevState,
+      [e.target.name + 'Error']: error,
     }));
   }
 
   const Submit = () => {
 
-    for(let test1 in client){
-      if(client[test1] === ""){
+    for (let test1 in client) {
+      if (client[test1] === "") {
         return;
       }
 
     }
 
-    for(let test in clientError){
-      if(clientError[test] !== ""){
+    for (let test in clientError) {
+      if (clientError[test] !== "") {
         return;
       }
     }
 
     registerClient(client)
       .then(
-          setTimeout(()=>{
-            navigate("/login");
-          },500)
+        setTimeout(() => {
+          navigate("/login");
+        }, 500)
       )
-      .catch(error=> console.log(error));
+      .catch(error => console.log(error));
   }
 
   return (
-    <div className="registerDesign">
-      <CustomInput
-        design={`inputDesign ${clientError.first_nameError !== "" ? 'inputDesignError' : ''}`}
-        type={"text"}
-        name={"first_name"}
-        placeholder={"FIRST NAME"}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.first_nameError}</div>
-      <CustomInput
-        design={`inputDesign ${clientError.last_nameError !== "" ? 'inputDesignError' : ''}`}
-        type={"text"}
-        name={"last_name"}
-        placeholder={"LAST NAME"}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.last_nameError}</div>
-      <CustomInput
-        design={`inputDesign ${clientError.emailError !== "" ? 'inputDesignError' : ''}`}
-        type={"email"}
-        name={"email"}
-        placeholder={"EMAIL"}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.emailError}</div>
-      <CustomInput
-        design={`inputDesign ${clientError.passwordError !== "" ? 'inputDesignError' : ''}`}
-        type={"password"}
-        name={"password"}
-        placeholder={"PASSWORD"}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.passwordError}</div>
-      <CustomInput
-        design={`inputDesign ${clientError.phoneError !== "" ? 'inputDesignError' : ''}`}
-        type={"text"}
-        name={"phone"}
-        placeholder={"PHONE"}
-        // value={}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.phoneError}</div>
-      <div className='buttonSubmit' onClick={Submit}>Submit</div>
+    <div className="global">
+      <div className="registerDesign">
+        <CustomInput
+          design={`inputDesign ${clientError.first_nameError !== "" ? 'inputDesignError' : ''}`}
+          type={"text"}
+          name={"first_name"}
+          placeholder={"FIRST NAME"}
+          // value={}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{clientError.first_nameError}</div>
+        <CustomInput
+          design={`inputDesign ${clientError.last_nameError !== "" ? 'inputDesignError' : ''}`}
+          type={"text"}
+          name={"last_name"}
+          placeholder={"LAST NAME"}
+          // value={}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{clientError.last_nameError}</div>
+        <CustomInput
+          design={`inputDesign ${clientError.emailError !== "" ? 'inputDesignError' : ''}`}
+          type={"email"}
+          name={"email"}
+          placeholder={"EMAIL"}
+          // value={}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{clientError.emailError}</div>
+        <CustomInput
+          design={`inputDesign ${clientError.passwordError !== "" ? 'inputDesignError' : ''}`}
+          type={"password"}
+          name={"password"}
+          placeholder={"PASSWORD"}
+          // value={}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{clientError.passwordError}</div>
+        <CustomInput
+          design={`inputDesign ${clientError.phoneError !== "" ? 'inputDesignError' : ''}`}
+          type={"text"}
+          name={"phone"}
+          placeholder={"PHONE"}
+          // value={}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{clientError.phoneError}</div>
+        <div className='buttonSubmit' onClick={Submit}>Submit</div>
+      </div>
     </div>
   );
 };

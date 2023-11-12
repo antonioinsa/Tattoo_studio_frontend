@@ -69,8 +69,6 @@ export const Login = () => {
             logClient(auth)
                 .then(
                     (response) => {
-                        console.log(response);
-
                         if (response.error) {
                             setError("Invalid Email or Password")
                         } else {

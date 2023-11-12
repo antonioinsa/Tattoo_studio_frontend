@@ -1,13 +1,17 @@
 .global {
-    height: 90vh;
+    height: 96vh;
     width: 100vw;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(198, 198, 239);
+    background-image: url("../../Images/wallpaperTattoArtist.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
+
 .loginDesign {
 
     height: 40vh;
@@ -19,10 +23,16 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(26, 104, 132);
+    background-image: radial-gradient(#aeac7f 0.5px, transparent 0.5px), radial-gradient(#aeac7f 0.5px, transparent 0.5px);
+    background-size: 11px 11px;
+    background-position: 0 0, 5.5px 5.5px;
+    background-color: #1a6884;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.checked{
+.checked {
 
     width: 16vw;
 
@@ -64,8 +74,8 @@
     font-weight: bolder;
 }
 
-.registerButton{
-    
+.registerButton {
+
     height: 3vh;
     width: 5vw;
 

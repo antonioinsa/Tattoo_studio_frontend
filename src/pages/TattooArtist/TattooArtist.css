@@ -1,6 +1,6 @@
 .tattooArtistDesign {
 
-    height: 90vh;
+    height: 96vh;
     width: 100vw;
 
     display: flex;
@@ -9,4 +9,23 @@
     align-items: center;
 
     background-color: rgb(84, 25, 25);
+}
+
+.workerRoster {
+
+    display: grid;
+    grid-template-columns:repeat(auto-fill, minmax(5em, 1fr));
+    gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.waiting {
+
+    height: 90vw;
+    width: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

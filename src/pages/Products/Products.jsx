@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { allProducts } from '../../services/apiCalls';
 import "./Products.css";
-import { Card } from '../../common/Card/Card';
 
 export const Product = () => {
 

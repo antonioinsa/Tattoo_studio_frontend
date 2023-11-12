@@ -1,6 +1,6 @@
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import '@mantine/core/styles.css'
-import React, { useState } from 'react';
+
 
 export const Card = () => {
 

@@ -1,9 +1,9 @@
 .headerDesign {
 
-    height: 10vh;
+    height: 4vh;
     width: 100vw;
 
-    background-color: darkcyan;
+    background-color: black;
 
     display: flex;
     flex-direction: row;
