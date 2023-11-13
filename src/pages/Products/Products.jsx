@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { allProducts } from '../../services/apiCalls';
 import "./Products.css";
+import { TattooCard } from '../../common/TattooCard/TattooCard';
 
 export const Product = () => {
 
@@ -18,7 +19,7 @@ export const Product = () => {
                     characters => {
                         console.log(characters)
 
-                        setCharacters(characters.data.results)
+                        setCharacters(characters.data.data)
                     }
                 )
                 .catch(error => console.log(error))
@@ -45,7 +46,7 @@ export const Product = () => {
                             characters.map(
                                 character => {
                                     return (
-                                        <Card 
+                                        <TattooCard 
                                             key={character.id}
                                             name={character.name}
                                             image={character.image}

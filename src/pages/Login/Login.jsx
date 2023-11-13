@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logClient, logWorker } from "../../services/apiCalls";
@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
 import { ChoiceSwitch } from "../../common/inputSwitch/Input ";
 import { Link } from 'react-router-dom';
-
+import { useDispatch } from "react-redux";
+import { login } from "../userSlice";
 
 export const Login = () => {
+
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -26,15 +29,15 @@ export const Login = () => {
 
     const [checked, setChecked] = useState(false)
 
+    const switchHandler = (e) => {
+        setChecked(e.target.checked)
+    }
+
     const functionHandler = (e) => {
         setAuth((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
-    }
-
-    const switchHandler = (e) => {
-        setChecked(e.target.checked)
     }
 
     const errorCheck = (e) => {
@@ -72,11 +75,9 @@ export const Login = () => {
                         if (response.error) {
                             setError("Invalid Email or Password")
                         } else {
-                            localStorage.setItem("token", response.data.token)
-
+                            dispatch(login({ credentials: response.data.token }))
                             setTimeout(() => {
-                                navigate("/");
-
+                                navigate("/")
                             }, 500);
                         }
                     }
@@ -120,7 +121,7 @@ export const Login = () => {
                     <div className="checked">
                         <ChoiceSwitch
                             checked={checked}
-                            onChange={switchHandler}
+                            functionChange={switchHandler}
                         />
                     </div>
                     <div className="space"></div>

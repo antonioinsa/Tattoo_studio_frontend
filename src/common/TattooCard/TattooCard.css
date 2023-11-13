@@ -1,7 +1,7 @@
 .tattooCardDesign {
 
-    height: 12em;
-    width: 10em;
+    height: 20em;
+    width: 18em;
 
     border-radius: 1em;
 
@@ -10,8 +10,10 @@
     align-items: center;
     flex-direction: column;
 
-    background-color: darkcyan;
-    border: 0.2 solid black;
+    background-color: rgba(255, 255, 255, 0.7);    
+    box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
+-webkit-box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
 
     transition: 1s;
 
@@ -26,11 +28,16 @@
 
 .selectedCard {
 
-    background-color: red;
+    background-color: rgb(72, 142, 241);
 }
 
 .avatar {
 
-    height: 6em;
-    width: 6em;
+    height: 13em;
+    width: 12em;
+    
+}
+
+.text{
+    font-weight: bolder;
 }

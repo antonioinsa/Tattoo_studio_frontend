@@ -7,30 +7,29 @@ import { LoaderBar } from '../../common/Loader/Loader';
 export const TattooArtist = () => {
 
     const [TattooArtists, setTattooArtists] = useState([])
-    //const [loading, setLoading] = useState(true)
-    //const [error, setError] = useState("")
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
         if (TattooArtists.length === 0) {
             TattooArtistList()
                 .then(response => {
-                    setTattooArtists(response.data)
-                    //setLoading(false)
+                    setTattooArtists(response.data.data)
+                    setLoading(false)
                 }
                 )
                 .catch(error => {
                     console.log(error)
                     console.error("Error fetching tattoo artists", error)
-                    //setLoading(false)
+                    setLoading(false)
                 })
         }
 
     },[])
 
-    //const tellMe = (argumento) => {
-    //    console.log(argumento)
-    //}
+    const tellMe = (argumento) => {
+        console.log(argumento)
+    }
 
 
     return (
@@ -50,8 +49,8 @@ export const TattooArtist = () => {
                                                     first_name={tattooArtist.first_name}
                                                     last_name={tattooArtist.last_name}
                                                     nationality={tattooArtist.nationality}
-                                                    //selected={"selectedCard"}
-                                                    //selectFunction={() => tellMe(tattooArtist)}
+                                                    selected={"selectedCard"}
+                                                    selectFunction={() => tellMe(tattooArtist)}
                                                 />
                                             )
                                         

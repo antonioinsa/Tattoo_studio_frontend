@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const allProducts = async (body) => {
-    return await axios.get(`http://localhost:3000/client/products`, body)
+export const allProducts = async () => {
+    return await axios.get(`http://localhost:3000/client/products`)
 }
 
 export const TattooArtistList = async () => {
