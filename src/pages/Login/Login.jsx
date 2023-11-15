@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logClient, logWorker } from "../../services/apiCalls";
@@ -11,9 +11,8 @@ import { login } from "../userSlice";
 
 export const Login = () => {
 
-    const dispatch = useDispatch();
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [auth, setAuth] = useState({
         email: "",
@@ -76,6 +75,9 @@ export const Login = () => {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
+
+                            console.log(response.data.token);
+                            
                             setTimeout(() => {
                                 navigate("/")
                             }, 500);
@@ -100,7 +102,7 @@ export const Login = () => {
                             localStorage.setItem("token", response.data.token)
 
                             setTimeout(() => {
-                                navigate("/worker");
+                                navigate("/accountworker");
 
                             }, 500);
                         }

@@ -3,11 +3,13 @@ import { TattooArtistList } from '../../services/apiCalls';
 import "./TattooArtist.css";
 import { TattooCard } from '../../common/TattooCard/TattooCard';
 import { LoaderBar } from '../../common/Loader/Loader';
+import { NavLink } from 'react-router-dom';
 
 export const TattooArtist = () => {
 
     const [TattooArtists, setTattooArtists] = useState([])
     const [loading, setLoading] = useState(true)
+    
 
     useEffect(() => {
 
@@ -25,8 +27,9 @@ export const TattooArtist = () => {
                 })
         }
 
-    },[])
+    }, [TattooArtistList])
 
+    
     const tellMe = (argumento) => {
         console.log(argumento)
     }
@@ -35,32 +38,34 @@ export const TattooArtist = () => {
     return (
         <div className='tattooArtistDesign'>
             {
-                
+
                 TattooArtists.length > 0
 
-                        ? (
-                            <div className='workerRoster'>
-                                {
-                                    TattooArtists.map(
-                                        (tattooArtist) => (
-                                                <TattooCard
-                                                    key={tattooArtist.id}
-                                                    photo={tattooArtist.photo}
-                                                    first_name={tattooArtist.first_name}
-                                                    last_name={tattooArtist.last_name}
-                                                    nationality={tattooArtist.nationality}
-                                                    selected={"selectedCard"}
-                                                    selectFunction={() => tellMe(tattooArtist)}
-                                                />
-                                            )
-                                        
+                    ? (
+                        <div className='workerRoster'>
+                            {
+                                TattooArtists.map(
+                                    (tattooArtist) => (
+                                        <NavLink to={'/products'}>
+                                            <TattooCard
+                                                key={tattooArtist.id}
+                                                photo={tattooArtist.photo}
+                                                first_name={tattooArtist.first_name}
+                                                last_name={tattooArtist.last_name}
+                                                nationality={tattooArtist.nationality}
+                                                //selected={"selectedCard"}
+                                                selectFunction={() => tellMe(tattooArtist)}
+                                            />
+                                        </NavLink>
                                     )
-                                }
-                            </div>
-                        )
 
-                        : (<div className='waiting'>Loading<LoaderBar /></div>
-                        )
+                                )
+                            }
+                        </div>
+                    )
+
+                    : (<div className='waiting'>Loading<LoaderBar /></div>
+                    )
             }
         </div>
     );

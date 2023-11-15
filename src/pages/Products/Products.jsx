@@ -1,34 +1,31 @@
-
 import React, { useState, useEffect } from 'react';
 import { allProducts } from '../../services/apiCalls';
-import "./Products.css";
-import { TattooCard } from '../../common/TattooCard/TattooCard';
+import "./Products.css"
+import { LoaderBar } from '../../common/Loader/Loader';
+import { ProductCard } from '../../common/ProductCard/ProductCard';
 
 export const Product = () => {
 
-    const [characters, setCharacters] = useState([]);
+    const [Products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+console.log(Products);
+    useEffect(() => {
 
-    useEffect(()=>{
-
-        if(characters.length === 0){
-
-            // setTimeout(()=>{
-
-                allProducts()
-                .then(
-                    characters => {
-                        console.log(characters)
-
-                        setCharacters(characters.data.data)
-                    }
+        if (Products.length === 0) {
+            allProducts()
+                .then(response => {
+                    setProducts(response.data.data)
+                    setLoading(false)
+                }
                 )
-                .catch(error => console.log(error))
-
-            // }, 2000)
-           
+                .catch(error => {
+                    console.log(error)
+                    console.error("Error fetching products", error)
+                    setLoading(false)
+                })
         }
 
-    },[characters]);
+    }, [Products])
 
     const tellMe = (argumento) => {
         console.log(argumento)
@@ -36,36 +33,35 @@ export const Product = () => {
 
 
     return (
-        <div className='productDesign'>
-            {
-                characters.length > 0 
+        <div className='body'>
+            <div className='productDesign'>
+                {
 
-                ? (
-                    <div className='characterRoster'>
-                        {
-                            characters.map(
-                                character => {
-                                    return (
-                                        <TattooCard 
-                                            key={character.id}
-                                            name={character.name}
-                                            image={character.image}
-                                            status={character.status}
-                                            location={character.location.name}
-                                            selected={"selectedCard"}
-                                            selectFunction={()=>tellMe(character)}
-                                        />
+                    Products.length > 0
+
+                        ? (
+                            <div className='productRoster'>
+                                {
+                                    Products.map(
+                                        (product) => (
+                                            <ProductCard
+                                                key={product.id}
+                                                article={product.article}
+                                                description={product.description}
+                                                //selected={"selectedCard"}
+                                                selectFunction={() => tellMe(product)}
+                                            />
+                                        )
+
                                     )
                                 }
-                            )
-                        }
-                    </div>
-                )
+                            </div>
+                        )
 
-                : (
-                    <div>Aún no han venido</div>
-                )
-            }
+                        : (<div className='waiting'>Loading<LoaderBar /></div>
+                        )
+                }
+            </div>
         </div>
-    )
-}
+    );
+};

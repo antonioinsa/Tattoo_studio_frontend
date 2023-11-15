@@ -1,22 +1,37 @@
-
-.productDesign {
-
+.body{
     height: 96vh;
     width: 100vw;
 
-    background-color: beige;
-
+    display: flex;
     
 }
+.productDesign {
+    
+    flex-direction: column;
+    justify-content: center;
 
-.characterRoster {
+    background-image: url("../../Images/wallpaperTattoArtist.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-    /* display: grid;
+.productRoster {
+
+    display: grid;
+    justify-content: center;
     grid-template-columns:repeat(auto-fill, minmax(5em, 1fr));
-    gap: 1em; */
+    gap: 1em;
     display: flex;
     flex-wrap: wrap;
+}
 
+.waiting {
 
+    height: 96vw;
+    width: 100vh;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

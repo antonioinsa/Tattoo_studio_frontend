@@ -17,6 +17,8 @@ export const Header = () => {
 
     }
 
+    console.log(rdxCredentials);
+
 
     return (
         <div className='headerDesign'>
@@ -28,14 +30,14 @@ export const Header = () => {
                 path={"/tattooArtist"}
                 title={"Tattoo Artist"}
             />
-            {!rdxCredentials?.credentials.token ? (
+            {!rdxCredentials?.credentials ? (
                 <LinkButton
                     path={"/login"}
                     title={"Login/Register"}
                 />
             ) : (
                 <>
-                    <LinkButton path={"/accountClient"} title={rdxCredentials.credentials.firstName} />
+                    <LinkButton path={"/accountClient"} title={rdxCredentials.credentials.first_name} />
                     <div onClick={logOutMe}>
                         <LinkButton path={"/"} title={"Log out"} />
                     </div>

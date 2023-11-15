@@ -1,0 +1,43 @@
+.productCardDesign {
+
+    height: 20em;
+    width: 18em;
+
+    border-radius: 1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: rgba(255, 255, 255, 0.7);    
+    box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
+-webkit-box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 0px 17px 17px rgba(0,0,0,0.42);
+
+    transition: 1s;
+
+    margin: 1em;
+}
+
+.productCardDesign:hover {
+
+    transform: scale(1.2);
+    transition: 1s;
+}
+
+.selectedCard {
+
+    background-color: rgb(72, 142, 241);
+}
+
+.avatar {
+
+    height: 13em;
+    width: 12em;
+    
+}
+
+.text{
+    font-weight: bolder;
+}
