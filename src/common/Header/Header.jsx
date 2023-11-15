@@ -3,23 +3,19 @@ import './Header.css'
 import { LinkButton } from '../LinkButton/LinkButton'
 import { useSelector, useDispatch } from "react-redux";
 import { logout, userData } from "../../pages/userSlice";
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const rdxCredentials = useSelector(userData);
-
+    
     const logOutMe = () => {
-
         dispatch(logout({ credentials: "" }))
-
         navigate("/")
-
     }
-
-    console.log(rdxCredentials);
-
-
     return (
         <div className='headerDesign'>
             <LinkButton
@@ -37,10 +33,13 @@ export const Header = () => {
                 />
             ) : (
                 <>
-                    <LinkButton path={"/accountClient"} title={rdxCredentials.credentials.first_name} />
+                <div onClick={logOutMe}>
+                        <LinkButton path={"/accountClient"} title={"Account"} />
+                    </div>
                     <div onClick={logOutMe}>
                         <LinkButton path={"/"} title={"Log out"} />
                     </div>
+                    
                 </>
             )}
         </div>

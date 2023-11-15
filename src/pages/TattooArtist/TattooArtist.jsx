@@ -53,7 +53,6 @@ export const TattooArtist = () => {
                                                 first_name={tattooArtist.first_name}
                                                 last_name={tattooArtist.last_name}
                                                 nationality={tattooArtist.nationality}
-                                                //selected={"selectedCard"}
                                                 selectFunction={() => tellMe(tattooArtist)}
                                             />
                                         </NavLink>

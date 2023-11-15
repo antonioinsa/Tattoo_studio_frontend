@@ -24,7 +24,7 @@ export const Login = () => {
         password: ''
     })
 
-    const [error, setError] = useState("")
+    const [msgError, setMsgError] = useState('');
 
     const [checked, setChecked] = useState(false)
 
@@ -75,8 +75,6 @@ export const Login = () => {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
-
-                            console.log(response.data.token);
                             
                             setTimeout(() => {
                                 navigate("/")
@@ -86,7 +84,7 @@ export const Login = () => {
                 )
                 .catch((error) => {
                     console.log(error);
-                    setError("Invalid Email or Password");
+                    setMsgError(error.message);
 
                 });
         } else {
@@ -99,7 +97,7 @@ export const Login = () => {
                         if (response.error) {
                             setError("Invalid Email or Password")
                         } else {
-                            localStorage.setItem("token", response.data.token)
+                            dispatch(login({ credentials: response.data.token }))
 
                             setTimeout(() => {
                                 navigate("/accountworker");
@@ -110,7 +108,7 @@ export const Login = () => {
                 )
                 .catch((error) => {
                     console.log(error);
-                    setError("Invalid Email or Password");
+                    setMsgError(error.message);
 
                 });
         }
@@ -132,7 +130,7 @@ export const Login = () => {
                         type={"email"}
                         name={"email"}
                         placeholder={"EMAIL"}
-                        //value={auth.email}
+                        //value={}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
@@ -142,16 +140,16 @@ export const Login = () => {
                         type={"password"}
                         name={"password"}
                         placeholder={"PASSWORD"}
-                        //value={auth.password}
+                        //value={}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
-                    <div className='errorMsg'>{authError.passwordError}</div>
+                    <div className='MsgError'>{authError.passwordError}</div>
                     <div className='registerButton'>
                         <Link to="/register">Register</Link>
                     </div>
                     <div className='buttonSubmit' onClick={Submit}>Login</div>
-                    <div className='errorMsg'>{error}</div>
+                    <div className='MsgError'>{msgError}</div>
                 </div>
             </div>
         </div>
