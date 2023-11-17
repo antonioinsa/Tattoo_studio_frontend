@@ -11,10 +11,13 @@ export const Header = () => {
     const navigate = useNavigate();
 
     const rdxCredentials = useSelector(userData);
-    
+
     const logOutMe = () => {
         dispatch(logout({ credentials: "" }))
         navigate("/")
+    }
+    const profile = () => {
+        navigate("/profile")
     }
     return (
         <div className='headerDesign'>
@@ -33,13 +36,13 @@ export const Header = () => {
                 />
             ) : (
                 <>
-                <div onClick={logOutMe}>
-                        <LinkButton path={"/accountClient"} title={"Account"} />
+                    <div onClick={profile}>
+                        <LinkButton path={"/profile"} title={"Account"} />
                     </div>
                     <div onClick={logOutMe}>
                         <LinkButton path={"/"} title={"Log out"} />
                     </div>
-                    
+
                 </>
             )}
         </div>

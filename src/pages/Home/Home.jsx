@@ -3,12 +3,17 @@ import "./Home.css";
 
 export const Home = () => {
     return (
-        <div className="homeDesign">
-            <div>
-            <LinkButton
-                path={"/tattooArtist"}
-                title={"Tattoo Artist"}
-            />
+        <div className="global">
+            <div className="homeDesign">
+                <div className="logo">
+                    <img draggable="false" src="./src/Images/zaharia_logo.png"></img>
+                </div>
+                <div>
+                    <LinkButton
+                        path={"/tattooArtist"}
+                        title={"Tattoo Artist"}
+                    />
+                </div>
             </div>
         </div>
     )

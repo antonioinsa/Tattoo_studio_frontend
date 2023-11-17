@@ -75,7 +75,7 @@ export const Login = () => {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
-                            
+
                             setTimeout(() => {
                                 navigate("/")
                             }, 500);
@@ -126,21 +126,23 @@ export const Login = () => {
                     </div>
                     <div className="space"></div>
                     <CustomInput
+                        disabled={false}
                         design={`inputDesign ${authError.emailError !== "" ? 'inputDesignError' : ''}`}
                         type={"email"}
                         name={"email"}
                         placeholder={"EMAIL"}
-                        //value={}
+                        value={""}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
                     <div className='errorMsg'>{authError.emailError}</div>
                     <CustomInput
+                        disabled={false}
                         design={`inputDesign ${authError.passwordError !== "" ? 'inputDesignError' : ''}`}
                         type={"password"}
                         name={"password"}
                         placeholder={"PASSWORD"}
-                        //value={}
+                        value={""}
                         functionProp={functionHandler}
                         functionBlur={errorCheck}
                     />
