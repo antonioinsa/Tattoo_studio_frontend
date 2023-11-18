@@ -37,9 +37,18 @@ export const dataClient = async (token) => {
     })
 }
 
-export const updateClient = async (token) => {
+export const updateClient = async (token, id, body) => {
     console.log(token);
-    return await axios.put (`http://localhost:3000/client/account/modifyAccount`, {
+    return await axios.put (`http://localhost:3000/client/account/modifyAccount/${id}`, body,{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
+export const setPrice = async (token, id, body) => {
+    console.log(token);
+    return await axios.put (`http://localhost:3000/client/account/modifyAccount/${id}`, body,{
         headers: {
             'Authorization': `Bearer ${token}`
         }

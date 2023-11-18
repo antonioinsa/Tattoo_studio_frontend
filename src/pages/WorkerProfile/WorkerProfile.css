@@ -1,0 +1,96 @@
+.tableProfileDesign {
+    height: 96vh;
+    width: 100vw;
+
+    display: flex;
+
+
+    background-image: url("../../Images/wallpaperHand.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.profileDesign {
+
+    height: 96vh;
+    width: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs {
+
+    height: 96vh;
+    width: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.appointmentDesign {
+
+    height: 96vh;
+    width: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.tableAppointment {
+
+
+    height: 80vh;
+    width: 45vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(105, 105, 105, 0.9);
+    border-radius: 10%;
+
+
+
+}
+
+.request {
+    
+    height: 70vh;
+    width: 44vw;
+    border-radius: 5%;
+
+    flex-direction: row;
+}
+
+.setPrice {
+
+    height: 2em;
+    width: 10em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    border-radius: 1em;
+    transition: 0.3s;
+}
+
+.setPrice:hover {
+
+    transition: 0.3s;
+    background-color: darkorange;
+}

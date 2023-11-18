@@ -6,15 +6,25 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { dataClient } from "../../services/apiCalls";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
 
   const navigate = useNavigate()
-
   const datosRdxUser = useSelector(userData)
-  //console.log(datosRdxUser);
   const token = datosRdxUser.credentials
 
+  //const passwordToDecode = datosRdxUser.credentials.password
+  //const decodedPassword = bcrypt.hashSync(passwordToDecode, 10)
+  //  console.log("Password decodificado:", decodedPassword)
+  //}
+  //if (!bcrypt.compareSync(password, worker.password)) {
+  //  return res.status(401).json
+  //      ({
+  //          success: true,
+  //          message: "Worker or password incorrect"
+  //      })
+  //}
 
   const [profile, setProfile] = useState({
     first_name: datosRdxUser.credentials.first_name,
@@ -45,7 +55,6 @@ export const Profile = () => {
     }
     getProfile()
   }, [token])
-
 
   useEffect(() => {
 
@@ -173,10 +182,14 @@ export const Profile = () => {
         }
       </div>
       <div className="manageAppointmentDesign">
-        <iframe width="40%" height="20%" src="https://www.youtube.com/embed/l5Ed5ecTiUo?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+        <iframe width="80%" height="26%" src="https://www.youtube.com/embed/l5Ed5ecTiUo?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
         <div>
-        <div className="buttonAppointments">Appointment history</div>
-        <div className="buttonAppointments">New appointment</div>
+          < Link to="/datingHistory">
+            <div className="buttonAppointments">Dating history</div>
+          </Link>
+          < Link to="/newappointment">
+            <div className="buttonAppointments">New appointment</div>
+          </Link>
         </div>
       </div>
     </div>

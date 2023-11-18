@@ -5,6 +5,10 @@ import { TattooArtist } from '../TattooArtist/TattooArtist';
 import { Register } from '../Register/Register';
 import { Product } from '../Products/Products';
 import { Profile } from '../Profile/Profile';
+import { NewAppointment } from '../NewAppointment/NewAppointment'
+// import { DatingHistory } from '../DatingHistory/DatingHistory';
+import { WorkerProfile } from '../WorkerProfile/WorkerProfile';
+import { SuperAdmin } from '../SuperAdmin/SuperAdmin';
 
 export const Body = () => {
     return (
@@ -12,12 +16,15 @@ export const Body = () => {
             <Routes>
                 <Route path="*" element={<Navigate to="/" />} />
                 <Route path="/" element={<Home />} />
-                <Route path="/tattooArtist" element={<TattooArtist />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/tattooArtist" element={<TattooArtist />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/worker" element={<Worker />} />
-                <Route path="/profile" element={<Profile />} />
                 <Route path="/products" element={<Product />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path='/newappointment' elements={<NewAppointment />} />
+                {/* <Route path='/datinghistory' elements={<DatingHistory />} /> */}
+                <Route path="/worker" element={<WorkerProfile />} />
+                <Route path="/administration" element={<SuperAdmin />} />
             </Routes>
         </>
     )

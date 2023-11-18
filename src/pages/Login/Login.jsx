@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logClient, logWorker } from "../../services/apiCalls";
@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
 import { ChoiceSwitch } from "../../common/inputSwitch/Input ";
 import { Link } from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import { login } from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login, userData } from "../userSlice";
+import { jwtDecode } from "jwt-decode";
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const rdxUserData = useSelector(userData)
     const dispatch = useDispatch();
 
     const [auth, setAuth] = useState({
@@ -25,6 +27,12 @@ export const Login = () => {
     })
 
     const [msgError, setMsgError] = useState('');
+
+    useEffect(() => {
+        if (rdxUserData.credentials) {
+            navigate("/")
+        }
+    }, [rdxUserData])
 
     const [checked, setChecked] = useState(false)
 
@@ -98,9 +106,13 @@ export const Login = () => {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
-
+                            let decoded = jwtDecode(response.data.token)
                             setTimeout(() => {
-                                navigate("/accountworker");
+                                if (decoded.role === "superAdmin") {
+                                    navigate("/administration")
+                                } else {
+                                    navigate("/worker")
+                                }
 
                             }, 500);
                         }

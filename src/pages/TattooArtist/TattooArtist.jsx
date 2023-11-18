@@ -46,9 +46,8 @@ export const TattooArtist = () => {
                             {
                                 TattooArtists.map(
                                     (tattooArtist) => (
-                                        <NavLink to={'/products'}>
+                                        <NavLink key={tattooArtist.id} to={'/products'}>
                                             <TattooCard
-                                                key={tattooArtist.id}
                                                 photo={tattooArtist.photo}
                                                 first_name={tattooArtist.first_name}
                                                 last_name={tattooArtist.last_name}
