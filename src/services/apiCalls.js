@@ -72,4 +72,11 @@ export const clientAppointment = async (token) => {
     })
 }
 
+export const workerAppointment = async (token) => {
+    return await axios.get (`http://localhost:3000/appointment/tattooArtistAppointment`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
   

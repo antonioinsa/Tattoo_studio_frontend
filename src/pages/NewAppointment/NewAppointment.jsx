@@ -77,31 +77,31 @@ export const NewAppointment = () => {
 // }
 return (
   <div className="global">
-    <div className="appointmentDesign">
-      <CustomInput
-        design={`inputDesign ${appointmentError.dateError !== "" ? 'inputDesignError' : ''}`}
-        type={"date"}
-        name={"date"}
-        placeholder={"Date"}
-        value={""}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{appointmentError.dateError}</div>
-      <CustomInput
-        design={`inputDesign ${appointmentError.articleError !== "" ? 'inputDesignError' : ''}`}
-        type={"text"}
-        name={"article"}
-        placeholder={"Article nº"}
-        value={""}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div className='errorMsg'>{clientError.articleError}</div>
-
-      <div className='buttonCreate' onClick={Create}>Create</div>
-      <div>{message}</div>
-    </div>
+    {/* <div className="NewAppointmentDesign"> */}
+      {/* <CustomInput */}
+        {/* design={`inputDesign ${appointmentError.dateError !== "" ? 'inputDesignError' : ''}`} */}
+        {/* type={"date"} */}
+        {/* name={"date"} */}
+        {/* placeholder={"Date"} */}
+        {/* value={""} */}
+        {/* functionProp={functionHandler} */}
+        {/* functionBlur={errorCheck} */}
+       {/* /> */}
+      {/* <div className='errorMsg'>{appointmentError.dateError}</div> */}
+      {/* <CustomInput */}
+        {/* design={`inputDesign ${appointmentError.articleError !== "" ? 'inputDesignError' : ''}`} */}
+        {/* type={"text"} */}
+        {/* name={"article"} */}
+        {/* placeholder={"Article nº"} */}
+        {/* value={""} */}
+        {/* functionProp={functionHandler} */}
+        {/* functionBlur={errorCheck} */}
+       {/* /> */}
+      {/* <div className='errorMsg'>{clientError.articleError}</div> */}
+{/*  */}
+      {/* <div className='buttonCreate' onClick={Create}>Create</div> */}
+      {/* <div>{message}</div> */}
+    {/* </div> */}
   </div>
 )
 }
