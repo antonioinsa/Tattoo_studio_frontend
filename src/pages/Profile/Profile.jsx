@@ -5,7 +5,7 @@ import { validator } from "../../services/useful";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
-import { dataClient } from "../../services/apiCalls";
+import { dataClient, updateClient } from "../../services/apiCalls";
 import { Link } from "react-router-dom";
 
 export const Profile = () => {
@@ -13,6 +13,8 @@ export const Profile = () => {
   const navigate = useNavigate()
   const datosRdxUser = useSelector(userData)
   const token = datosRdxUser.credentials
+
+
 
   //const passwordToDecode = datosRdxUser.credentials.password
   //const decodedPassword = bcrypt.hashSync(passwordToDecode, 10)
@@ -82,21 +84,28 @@ export const Profile = () => {
     }))
   }
 
-  const sendData = () => {
-    const getProfile = async () => {
-      try {
-        const response = await updateClient(token, profile)
-        console.log('Respuesta del servidor:', response.data.data)
-        setProfile(response.data.data)
-      } catch (error) {
-        console.error('Error al obtener el perfil:', error)
-      }
+
+  const updateProfile = async () => {
+    try {
+      const body = {
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        email: profile.email,
+        phone: profile.phone,
+        password: profile.password
+      };
+
+      const response = await updateClient(token, body);
+
+      setProfile(response.data.data);
+      setIsEnabled(true);
+
+      // mensaje de OK
+    } catch (error) {
+      console.error('Error al actualizar el perfil:', error);
+      // manejar errores, mostrar mensajes de error
     }
-    getProfile()
-    setTimeout(() => {
-      setIsEnabled(true)
-    }, 400)
-  }
+  };
 
   const cancelEdit = async () => {
     setIsEnabled(true)
@@ -134,18 +143,7 @@ export const Profile = () => {
           functionProp={functionHandler}
           functionBlur={errorCheck}
         />
-        <CustomInput
-          disabled={isEnabled}
-          design={`inputDesign ${profileError.phoneError !== "" ? "inputDesignError" : ""
-            }`}
-          type={"text"}
-          name={"phone"}
-          placeholder={""}
-          value={profile.phone}
-          functionProp={functionHandler}
-          functionBlur={errorCheck}
-        />
-        <CustomInput
+          <CustomInput
           disabled={isEnabled}
           design={`inputDesign ${profileError.emailError !== "" ? "inputDesignError" : ""
             }`}
@@ -156,6 +154,17 @@ export const Profile = () => {
           functionProp={functionHandler}
           functionBlur={errorCheck}
         />
+        <CustomInput
+          disabled={isEnabled}
+          design={`inputDesign ${profileError.phoneError !== "" ? "inputDesignError" : ""
+            }`}
+          type={"text"}
+          name={"phone"}
+          placeholder={""}
+          value={profile.phone}
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+          />
         <CustomInput
           disabled={isEnabled}
           design={`inputDesign ${profileError.passwordError !== "" ? "inputDesignError" : ""
@@ -176,7 +185,7 @@ export const Profile = () => {
               <>
                 <div className="cancelDesign" onClick={() => cancelEdit()}>Cancel</div>
                 <div className="space"></div>
-                <div className="sendDesign" onClick={() => sendData()}>Send</div>
+                <div className="sendDesign" onClick={() => updateProfile()}>Send</div>
               </>
             )
         }
@@ -184,7 +193,7 @@ export const Profile = () => {
       <div className="manageAppointmentDesign">
         <iframe width="80%" height="26%" src="https://www.youtube.com/embed/l5Ed5ecTiUo?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
         <div>
-          < Link to="/datingHistory">
+          < Link to="/clientAppointment">
             <div className="buttonAppointments">Dating history</div>
           </Link>
           < Link to="/newappointment">

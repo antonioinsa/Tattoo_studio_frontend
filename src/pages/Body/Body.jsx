@@ -6,7 +6,7 @@ import { Register } from '../Register/Register';
 import { Product } from '../Products/Products';
 import { Profile } from '../Profile/Profile';
 import { NewAppointment } from '../NewAppointment/NewAppointment'
-// import { DatingHistory } from '../DatingHistory/DatingHistory';
+import { ClientAppointment } from '../ClientAppointment/ClientAppointment';
 import { WorkerProfile } from '../WorkerProfile/WorkerProfile';
 import { SuperAdmin } from '../SuperAdmin/SuperAdmin';
 
@@ -21,8 +21,8 @@ export const Body = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/products" element={<Product />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path='/newappointment' elements={<NewAppointment />} />
-                {/* <Route path='/datinghistory' elements={<DatingHistory />} /> */}
+                <Route path="/newappointment" elements={<NewAppointment />} />
+                <Route path="/clientAppointment" elements={<ClientAppointment />} />
                 <Route path="/worker" element={<WorkerProfile />} />
                 <Route path="/administration" element={<SuperAdmin />} />
             </Routes>

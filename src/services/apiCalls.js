@@ -32,25 +32,44 @@ export const registerClient = async (body) => {
 export const dataClient = async (token) => {
     return await axios.get (`http://localhost:3000/client/account`, {
         headers: {
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     })
 }
 
-export const updateClient = async (token, id, body) => {
-    console.log(token);
-    return await axios.put (`http://localhost:3000/client/account/modifyAccount/${id}`, body,{
+export const updateClient = async (token, body) => {
+    console.log(body);
+    return await axios.put (`http://localhost:3000/client/account/modifyAccount`, body,{
         headers: {
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     })
 }
 
 export const setPrice = async (token, id, body) => {
-    console.log(token);
+    //console.log(token);
     return await axios.put (`http://localhost:3000/client/account/modifyAccount/${id}`, body,{
         headers: {
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     })
 }
+
+export const createAppointment = (body, token) => {
+    return axios.post(`http://localhost:3000/appointment/create`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+};
+
+export const clientAppointment = async (token) => {
+    return await axios.get (`http://localhost:3000/client/account`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+  
