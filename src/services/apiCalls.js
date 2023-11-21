@@ -48,7 +48,7 @@ export const updateClient = async (token, body) => {
 
 export const setPrice = async (token, body) => {
     //console.log(token);
-    return await axios.put (`http://localhost:3000/appointment/workerupdate`, body,{
+    return await axios.put (`http://localhost:3000/appointment/workerupdate$`, body,{
         headers: {
             Authorization: `Bearer ${token}`
         }

@@ -5,34 +5,45 @@ import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { setPrice, workerAppointment } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { validator } from "../../services/useful";
 
 export const WorkerProfile = () => {
     const navigate = useNavigate()
     const datosRdxUser = useSelector(userData)
-    const token = datosRdxUser.credentials;
+    const token = datosRdxUser.credentials
 
+    const [appointments, setAppointments] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
     const [errorMessage, setErrorMessage] = useState(null)
 
+    const appointmentIds = appointments.map(appointment => appointment.id)
+    console.log(appointmentIds)
+
+
     const [profile, setProfile] = useState({
-        id: "",
-        price: ""
+        id: '',
+        price: ''
     })
-
+    console.log(appointments);
+    console.log(profile);
     const [profileError, setProfileError] = useState({
-        idError: '',
-        priceError: ''
+        id: '',
+        price: ''
     })
 
-    //const [isEnabled, setIsEnabled] = useState(false);
+    //const [isEnabled, setIsEnabled] = useState(true)
 
     useEffect(() => {
+
         if (!datosRdxUser.credentials) {
             navigate("/")
         }
-    }, [datosRdxUser, navigate])
+    }, [datosRdxUser])
 
     const errorCheck = (e) => {
+
         let error = ""
+
         error = validator(e.target.name, e.target.value)
 
         setProfileError((prevState) => ({
@@ -41,30 +52,12 @@ export const WorkerProfile = () => {
         }))
     }
 
-    const [editable, setEditable] = useState(false)
-
-    const setPrice = (e) => {
-        setEditable(e.target.checked)
+    const functionHandler = (e) => {
+        setProfile((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
     }
-
-        const addPriceById = async () => {
-            try {
-                const response = await setPrice(token, profile.id, { price: profile.price })
-                setProfile(response.data.data)
-                console.log(response.data.message);
-            } catch (error) {
-
-                setErrorMessage(error.response.data.message)
-            }
-            //setTimeout(() => {
-            //    setIsEnabled(true);
-            //}, 400);
-
-        };
-    
-    const [appointments, setAppointments] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(0)
-    console.log(appointments);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -72,46 +65,76 @@ export const WorkerProfile = () => {
                 if (response.data.success) {
                     setAppointments(response.data.appointments)
                 } else {
-                    console.error('Error al obtener las citas:', response.data.message)
+                    console.error(response.data.message)
                 }
             } catch (error) {
-                console.error('Error al obtener las citas:', error)
+                console.error('Error fetching appointments', error)
             }
-        };
+        }
 
         fetchData()
     }, [token])
 
+    const updatePrice = async () => {
+        try {
+            if (!profile.id || !profile.price) {
+                setErrorMessage('ID and Price are required')
+                return;
+            }
+
+            const body = {
+                id: profile.id,
+                price: profile.price
+            }
+
+            const response = await setPrice(token, body)
+
+            setAppointments(prevAppointments => {
+                const updatedAppointments = prevAppointments.map(appointment =>
+                    appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
+                )
+                return updatedAppointments
+            })
+
+            setErrorMessage(null)
+        } catch (error) {
+            console.error('Error updating price:', error)
+            setErrorMessage('Error updating price. Please try again')
+        }
+    }
+
     const showNextAppointment = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % appointments.length)
-    };
+    }
 
     const showPreviousAppointment = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + appointments.length) % appointments.length)
-    };
+    }
 
     return (
         <div className="tableProfileDesign">
             <div className="inputs">
                 <CustomInput
+                    disabled={false}
                     design="inputDesign"
                     type="text"
                     name="id"
                     placeholder="Id"
                     value={profile.id}
-                    onChange={setPrice}
-                    onBlur={errorCheck}
+                    functionChange={functionHandler}
+                    functionBlur={errorCheck}
                 />
                 <CustomInput
+                    disabled={false}
                     design="inputDesign"
                     type="text"
                     name="price"
                     placeholder="Price"
                     value={profile.price}
-                    onChange={setPrice}
-                    onBlur={errorCheck}
+                    functionChange={functionHandler}
+                    functionBlur={errorCheck}
                 />
-                <div className="setPrice" onClick={addPriceById}>Set price of product</div>
+                <div className="setPrice" onClick={updatePrice}>Set price of product</div>
                 {errorMessage && (<div className="error-message">{errorMessage}</div>)}
             </div>
             <div className="appointmentDesign">
@@ -133,17 +156,23 @@ export const WorkerProfile = () => {
                     ) : (
                         <p>No appointments available</p>
                     )}
-                    <div className="navigationButtons">
-                        <button onClick={showPreviousAppointment}
-                            disabled={appointments.length <= 1 ||
-                                currentIndex === 0}>Previous</button>
-
-                        <button onClick={showNextAppointment}
-                            disabled={appointments.length <= 1 ||
-                                currentIndex === appointments.length - 1}>Next</button>
-                    </div>
+                </div>
+                <div className="navigationButtons">
+                    <button
+                        onClick={showPreviousAppointment}
+                        disabled={appointments.length <= 1 || currentIndex === 0}
+                    >Previous
+                    </button>
+                    <button
+                        onClick={showNextAppointment}
+                        disabled={
+                            appointments.length <= 1 || currentIndex === appointments.length - 1
+                        }
+                    >Next
+                    </button>
                 </div>
             </div>
         </div>
     )
+
 }

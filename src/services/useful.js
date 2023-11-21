@@ -1,7 +1,3 @@
-import { useSelector } from "react-redux";
-import { userData } from "../pages/userSlice";
-import { useNavigate } from 'react-router-dom';
-
 export const validator = (type, value) => {
 
     switch (type) {
@@ -43,6 +39,22 @@ export const validator = (type, value) => {
                     return "";
                 }
             }
+        case "price":
+
+            if (typeof (value) !== "string") {
+                return `you must insert a string`
+            }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
 }
