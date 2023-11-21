@@ -7,84 +7,87 @@ import { setPrice, workerAppointment } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 
 export const WorkerProfile = () => {
-    const navigate = useNavigate();
-    const datosRdxUser = useSelector(userData);
+    const navigate = useNavigate()
+    const datosRdxUser = useSelector(userData)
     const token = datosRdxUser.credentials;
 
+    const [errorMessage, setErrorMessage] = useState(null)
+
     const [profile, setProfile] = useState({
-        id: datosRdxUser.credentials.id,
-        price: datosRdxUser.credentials.price
-    });
+        id: "",
+        price: ""
+    })
 
     const [profileError, setProfileError] = useState({
         idError: '',
         priceError: ''
-    });
+    })
 
     //const [isEnabled, setIsEnabled] = useState(false);
 
     useEffect(() => {
         if (!datosRdxUser.credentials) {
-            navigate("/");
+            navigate("/")
         }
-    }, [datosRdxUser, navigate]);
+    }, [datosRdxUser, navigate])
 
     const errorCheck = (e) => {
-        let error = "";
-        error = validator(e.target.name, e.target.value);
+        let error = ""
+        error = validator(e.target.name, e.target.value)
 
         setProfileError((prevState) => ({
             ...prevState,
             [e.target.name + 'Error']: error,
-        }));
-    };
+        }))
+    }
 
-    const functionHandler = (e) => {
-        setProfile((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }));
-    };
+    const [editable, setEditable] = useState(false)
 
-    const addPriceById = async () => {
-        try {
-            const response = await setPrice(token, profile.id, { price: profile.price });
-            setProfile(response.data.data);
-        } catch (error) {
-            console.error('Error al actualizar precio:', error);
-        }
-        //setTimeout(() => {
-        //    setIsEnabled(true);
-        //}, 400);
+    const setPrice = (e) => {
+        setEditable(e.target.checked)
+    }
 
-    };
+        const addPriceById = async () => {
+            try {
+                const response = await setPrice(token, profile.id, { price: profile.price })
+                setProfile(response.data.data)
+                console.log(response.data.message);
+            } catch (error) {
 
-    const [appointments, setAppointments] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);  // Nuevo estado para manejar el índice actual
+                setErrorMessage(error.response.data.message)
+            }
+            //setTimeout(() => {
+            //    setIsEnabled(true);
+            //}, 400);
 
+        };
+    
+    const [appointments, setAppointments] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+    console.log(appointments);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await workerAppointment(token);
+                const response = await workerAppointment(token)
                 if (response.data.success) {
-                    setAppointments(response.data.appointments);
+                    setAppointments(response.data.appointments)
                 } else {
-                    console.error('Error al obtener las citas:', response.data.message);
+                    console.error('Error al obtener las citas:', response.data.message)
                 }
             } catch (error) {
-                console.error('Error al obtener las citas:', error);
+                console.error('Error al obtener las citas:', error)
             }
         };
 
-        fetchData();
-    }, [token]);
-console.log(appointments);
+        fetchData()
+    }, [token])
+
     const showNextAppointment = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % appointments.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % appointments.length)
     };
 
     const showPreviousAppointment = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + appointments.length) % appointments.length);
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + appointments.length) % appointments.length)
     };
 
     return (
@@ -92,11 +95,11 @@ console.log(appointments);
             <div className="inputs">
                 <CustomInput
                     design="inputDesign"
-                    type="int"
+                    type="text"
                     name="id"
                     placeholder="Id"
                     value={profile.id}
-                    onChange={functionHandler}
+                    onChange={setPrice}
                     onBlur={errorCheck}
                 />
                 <CustomInput
@@ -105,10 +108,11 @@ console.log(appointments);
                     name="price"
                     placeholder="Price"
                     value={profile.price}
-                    onChange={functionHandler}
+                    onChange={setPrice}
                     onBlur={errorCheck}
                 />
                 <div className="setPrice" onClick={addPriceById}>Set price of product</div>
+                {errorMessage && (<div className="error-message">{errorMessage}</div>)}
             </div>
             <div className="appointmentDesign">
                 <div className="tableAppointment">
@@ -117,7 +121,8 @@ console.log(appointments);
                         <div>
                             <br />
                             <p>Type: {appointments[currentIndex].type}</p>
-                            <p>Price: {appointments[currentIndex].price}</p>
+                            <p className="inputsToEdit">Id: {appointments[currentIndex].id}</p>
+                            <p className="inputsToEdit">Price: {appointments[currentIndex].price}</p>
                             <p>Client: {appointments[currentIndex].client}</p>
                             <p>Phone: {appointments[currentIndex].phone}</p>
                             <p>Appointment Date: {appointments[currentIndex].appointment_date}</p>
@@ -130,15 +135,15 @@ console.log(appointments);
                     )}
                     <div className="navigationButtons">
                         <button onClick={showPreviousAppointment}
-                        disabled={appointments.length <= 1 || 
-                        currentIndex === 0}>Previous</button>
+                            disabled={appointments.length <= 1 ||
+                                currentIndex === 0}>Previous</button>
 
-                        <button onClick={showNextAppointment} 
-                        disabled={appointments.length <= 1 || 
-                        currentIndex === appointments.length - 1}>Next</button>
+                        <button onClick={showNextAppointment}
+                            disabled={appointments.length <= 1 ||
+                                currentIndex === appointments.length - 1}>Next</button>
                     </div>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

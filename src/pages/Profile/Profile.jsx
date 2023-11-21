@@ -92,7 +92,7 @@ export const Profile = () => {
         last_name: profile.last_name,
         email: profile.email,
         phone: profile.phone,
-        password: profile.password
+        //password: profile.password
       };
 
       const response = await updateClient(token, body);
@@ -111,7 +111,6 @@ export const Profile = () => {
     setIsEnabled(true)
     try {
       const response = await dataClient(token);
-      console.log('Respuesta del servidor:', response.data.data);
       setProfile(response.data.data);
     } catch (error) {
       console.error('Error al obtener el perfil:', error);
@@ -165,17 +164,7 @@ export const Profile = () => {
           functionProp={functionHandler}
           functionBlur={errorCheck}
           />
-        <CustomInput
-          disabled={isEnabled}
-          design={`inputDesign ${profileError.passwordError !== "" ? "inputDesignError" : ""
-            }`}
-          type={"password"}
-          name={"password"}
-          placeholder={""}
-          value={profile.password}
-          functionProp={functionHandler}
-          functionBlur={errorCheck}
-        />
+        
         {
           isEnabled
             ? (
@@ -193,8 +182,8 @@ export const Profile = () => {
       <div className="manageAppointmentDesign">
         <iframe width="80%" height="26%" src="https://www.youtube.com/embed/l5Ed5ecTiUo?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
         <div>
-          < Link to="/clientAppointment">
-            <div className="buttonAppointments">Dating history</div>
+          < Link to="/appointmenthistory">
+            <div className="buttonAppointments">Appointment history</div>
           </Link>
           < Link to="/newappointment">
             <div className="buttonAppointments">New appointment</div>

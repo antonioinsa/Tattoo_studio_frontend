@@ -1,0 +1,41 @@
+.tableAppointmentDesign{
+    height: 96vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("../../Images/wallpaperHand.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.appointmentRow {
+    background-color: rgb(145, 157, 156);
+    padding: 2em;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+  }
+  
+  .appointmentRow.even {
+    background-color: rgba(156, 156, 154, 0.851);
+    border-radius: 5%;
+    margin-bottom: 0.2em;
+  }
+  
+  .appointmentRow.odd {
+    background-color: rgba(128, 125, 125, 0.84);
+    border-radius: 5%;
+    margin-top: 0.2em;
+  }
+  
+  .navigationButtons{
+    margin-top: 1em;
+  }
+
+  .name{
+    color: black;
+  }

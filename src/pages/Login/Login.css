@@ -65,7 +65,13 @@
     cursor: pointer;
 }
 
-.errorMsg {
+.msgError {
+
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+}
+
+.MsgError {
 
     color: rgb(255, 0, 0);
     font-weight: bolder;
