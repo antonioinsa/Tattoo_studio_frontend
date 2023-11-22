@@ -10,6 +10,14 @@
 
     background-color: grey;
 }
+ .superAdmin{
+
+    width: 100vw;
+    display: flex;
+    justify-items: end;
+    margin-left: 8em;
+color: brown;
+ }
 
 .optionsDesign{
 
@@ -24,11 +32,18 @@
     
 }
 
+.buttonsDesign{
+
+    display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+}
+
 .buttonSa {
 
 
-    height: 5em;
-    width: 18em;
+    height: 3em;
+    width: 10em;
 
     display: flex;
     justify-content: center;
@@ -46,4 +61,9 @@
 
     transition: 0.3s;
     background-color: orange;
+}
+
+.tableInfoDesign{
+    width: 90vw;
+    height: 50vh;
 }

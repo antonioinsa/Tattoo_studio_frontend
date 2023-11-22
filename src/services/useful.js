@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 export const validator = (type, value) => {
 
     switch (type) {
@@ -5,9 +6,9 @@ export const validator = (type, value) => {
         case 'email':
 
             if (! /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/.test(value)) {
-                return "Invalid email format";
+                return "Invalid email format"
             } else {
-                return "";
+                return ""
             }
 
         case 'first_name':
@@ -22,9 +23,9 @@ export const validator = (type, value) => {
         case 'phone':
 
             if (! /(?=.*?[0-9])/.test(value)) {
-                return "Incorrect phone number";
+                return "Incorrect phone number"
             } else {
-                return "";
+                return ""
             }
 
         case 'password':
@@ -34,27 +35,51 @@ export const validator = (type, value) => {
             } else {
 
                 if (! /[\d()+-]/g.test(value)) {
-                    return "Invalid password format";
+                    return "Invalid password format"
                 } else {
-                    return "";
+                    return ""
                 }
             }
-        case "price":
-
-            if (typeof (value) !== "string") {
-                return `you must insert a string`
+        case 'price':
+            if (typeof value !== 'string') {
+                return "Must insert a string"
+            } else {
+                const priceRegex = /^\d+(\.\d{1,2})?$/
+                if (!priceRegex.test(value)) {
+                    return "Price must be a number with up to 2 decimals"
+                } else {
+                    return ""
+                }
             }
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        case 'article':
+            if (value.trim() === '') {
+                return 'Artículo es requerido'
+            } else if (!/^\d+$/.test(value)) {
+                return "Must contain only numbers"
+            } else {
+                return ""
+            }
+
+        case 'date':
+            const selectedDate = dayjs(value);
+
+            if (selectedDate.isBefore(dayjs(), 'minute')) {
+                return "You cannot select a date prior to the current date"
+            }
+
+            return ""
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

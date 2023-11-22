@@ -17,21 +17,16 @@ export const WorkerProfile = () => {
     const [errorMessage, setErrorMessage] = useState(null)
 
     const appointmentIds = appointments.map(appointment => appointment.id)
-    console.log(appointmentIds)
-
-
+    
     const [profile, setProfile] = useState({
         id: '',
         price: ''
     })
-    console.log(appointments);
-    console.log(profile);
+   
     const [profileError, setProfileError] = useState({
         id: '',
         price: ''
     })
-
-    //const [isEnabled, setIsEnabled] = useState(true)
 
     useEffect(() => {
 
@@ -79,7 +74,7 @@ export const WorkerProfile = () => {
         try {
             if (!profile.id || !profile.price) {
                 setErrorMessage('ID and Price are required')
-                return;
+                return
             }
 
             const body = {
@@ -93,13 +88,16 @@ export const WorkerProfile = () => {
                 const updatedAppointments = prevAppointments.map(appointment =>
                     appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
                 )
+                
                 return updatedAppointments
             })
 
+            setSuccessMessage('Price updated successfully')
             setErrorMessage(null)
         } catch (error) {
             console.error('Error updating price:', error)
-            setErrorMessage('Error updating price. Please try again')
+            setErrorMessage('Error updating price or ID not found. Please try again')
+            
         }
     }
 
@@ -121,7 +119,7 @@ export const WorkerProfile = () => {
                     name="id"
                     placeholder="Id"
                     value={profile.id}
-                    functionChange={functionHandler}
+                    functionProp={functionHandler}
                     functionBlur={errorCheck}
                 />
                 <CustomInput
@@ -131,7 +129,7 @@ export const WorkerProfile = () => {
                     name="price"
                     placeholder="Price"
                     value={profile.price}
-                    functionChange={functionHandler}
+                    functionProp={functionHandler}
                     functionBlur={errorCheck}
                 />
                 <div className="setPrice" onClick={updatePrice}>Set price of product</div>

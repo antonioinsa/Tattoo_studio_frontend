@@ -1,12 +1,36 @@
-.NewAppointmentDesign {
+.allView {
 
     height: 96vh;
     width: 100vw;
-
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 
-    background-color: blue;
+    background-color: gray;
+}
+
+.createAppointmentDesign {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.datePicker {
+
+    height: 6vh;
+    margin-top: 2em;
+}
+
+.customInput {
+
+    height: 5vh;
+    margin-top: 2em;
+}
+
+.ourAppointments {
+    
+    height: 80vh;
+    width: 100vw;
 }

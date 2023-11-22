@@ -92,7 +92,6 @@ export const Profile = () => {
         last_name: profile.last_name,
         email: profile.email,
         phone: profile.phone,
-        //password: profile.password
       };
 
       const response = await updateClient(token, body);
