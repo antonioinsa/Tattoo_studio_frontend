@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./AllClients.css";
+import "./AllAppointments.css";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
-import { allClients } from "../../services/apiCalls";
+import { allAppointments } from "../../services/apiCalls";
 import { Link } from "react-router-dom";
 
-export const AllClients = () => {
+export const AllAppointments = () => {
     const navigate = useNavigate()
     const datosRdxUser = useSelector(userData)
     const token = datosRdxUser.credentials
@@ -17,64 +17,81 @@ export const AllClients = () => {
         }
     }, [datosRdxUser])
 
-    const [allClientsList, setAllClientsList] = useState([])
+    const [allAppointmentsList, setAllAppointmentsList] = useState([])
 
     useEffect(() => {
         if (datosRdxUser.role === 'superAdmin') {
-            const getAllClients = async () => {
+            const getAllAppointments = async () => {
                 try {
-                    const response = await allClients(token)
-                    setAllClientsList(response.data.data)
+                    const response = await allAppointments(token)
+                    setAllAppointmentsList(response.data.data)
                 } catch (error) {
                     console.error('Error al obtener el perfil:', error)
                 }
             };
-            getAllClients()
+            getAllAppointments()
+            
         }
     }, [datosRdxUser.role])
-
+    
     const goToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     return (
-        <div className="clientsDesign">
-            <div className="viewAllClients">
-                {allClientsList.map((client, index) => (
-                    <div key={client.id} className="clientItem">
-                        <div className="line1">
+        <div className="appointmentsDesign">
+            <div className="viewAllAppointments">
+                {allAppointmentsList.map((appointments, index) => (
+                    <div key={appointments.id} className="appointmentItem">
+                        <div className="lineOne">
                             <div>
-                                <span>First_name: </span>
-                                <span>{client.first_name}</span>
+                                <span>Id_appointment: </span>
+                                <span>{appointments.id_appointment}</span>
                             </div>
                             <div>
-                                <span>Id: </span>
-                                <span>{client.id}</span>
+                                <span>Worker_first_name: </span>
+                                <span>{appointments.worker_first_name}</span>
                             </div>
                             <div>
-                                <span>Last_name: </span>
-                                <span>{client.last_name}</span>
+                                <span>Worker_last_name: </span>
+                                <span>{appointments.worker_last_name}</span>
                             </div>
                             <div>
-                                <span>Role: </span>
-                                <span>{client.role}</span>
+                                <span>Client_first_name: </span>
+                                <span>{appointments.client_first_name}</span>
                             </div>
                             <div>
-                                <span>Email: </span>
-                                <span>{client.email}</span>
+                                <span>Client_last_name: </span>
+                                <span>{appointments.client_last_name}</span>
                             </div>
                             <div>
-                                <span>Phone: </span>
-                                <span>{client.phone}</span>
+                                <span>Type: </span>
+                                <span>{appointments.type}</span>
                             </div>
                         </div>
-                        <div className="line2">
+                        <div className="lineTwo">
+                        <div>
+                                <span>Article: </span>
+                                <span>{appointments.article}</span>
+                            </div>
+                            <div>
+                                <span>Description: </span>
+                                <span>{appointments.description}</span>
+                            </div>
+                            <div>
+                                <span>Price: </span>
+                                <span>{appointments.price}</span>
+                            </div>
+                            <div>
+                                <span>Appointment_date: </span>
+                                <span>{appointments.appointment_date}</span>
+                            </div>
                             <div>
                                 <span>Last_updated: </span>
-                                <span>{client.updated_at}</span>
+                                <span>{appointments.last_updated}</span>
                             </div>
                         </div>
-                        {index < allClientsList.length - 1 && <div className="line"></div>}
+                        {index < allAppointmentsList.length - 1 && <div className="Line"></div>}
                     </div>
                 ))}
             </div>

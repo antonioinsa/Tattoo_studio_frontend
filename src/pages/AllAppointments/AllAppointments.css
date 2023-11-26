@@ -1,4 +1,4 @@
-.clientsDesign {
+.appointmentsDesign {
     height: 96vh;
     width: 100vw;
     display: flex;
@@ -7,33 +7,33 @@
     background-color: grey;
 }
 
-.viewAllClients {
+.viewAllAppointments {
     width: 40vw;
 }
 
-.clientItem {
+.appointmentItem {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
 }
 
-.line1 {
+.lineOne {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.line2 {
+.lineTwo {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.line1 div {
+.lineOne div {
     width: 48%;
 }
 
-.line2 div {
+.lineTwo div {
     width: 60%;
 }
 
