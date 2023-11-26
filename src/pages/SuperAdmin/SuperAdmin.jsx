@@ -18,6 +18,7 @@ export const SuperAdmin = () => {
 
     return (
         <div className="superAdminDesign">
+            <h2>SuperAdmin</h2>
             <div className="buttonsDesign">
                 <Link to="/allclients">
                     <div className="buttonSa">All Clients</div>
