@@ -13,7 +13,7 @@ export const Header = () => {
   const rdxCredentials = useSelector(userData);
 
   const logOutMe = () => {
-    dispatch(logout({ credentials: '' }));
+    dispatch(logout({ credentials: '', role: '' }));
     navigate('/');
   };
 

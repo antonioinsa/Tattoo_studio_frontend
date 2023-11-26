@@ -35,7 +35,7 @@ export const Login = () => {
             navigate("/")
         }
     }, [rdxUserData])
-
+console.log(rdxUserData);
     const [checked, setChecked] = useState(false)
 
     const switchHandler = (e) => {
@@ -85,7 +85,8 @@ export const Login = () => {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
-
+                            let decoded = jwtDecode(response.data.token)
+                            dispatch(login({role: decoded.role}))
                             setTimeout(() => {
                                 navigate("/")
                             }, 500);
@@ -109,6 +110,7 @@ export const Login = () => {
                         } else {
                             dispatch(login({ credentials: response.data.token }))
                             let decoded = jwtDecode(response.data.token)
+                            dispatch(login({role: decoded.role}))
                             setTimeout(() => {
                                 if (decoded.role === "superAdmin") {
                                     navigate("/administration")

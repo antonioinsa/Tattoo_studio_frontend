@@ -14,20 +14,6 @@ export const Profile = () => {
   const datosRdxUser = useSelector(userData)
   const token = datosRdxUser.credentials
 
-
-
-  //const passwordToDecode = datosRdxUser.credentials.password
-  //const decodedPassword = bcrypt.hashSync(passwordToDecode, 10)
-  //  console.log("Password decodificado:", decodedPassword)
-  //}
-  //if (!bcrypt.compareSync(password, worker.password)) {
-  //  return res.status(401).json
-  //      ({
-  //          success: true,
-  //          message: "Worker or password incorrect"
-  //      })
-  //}
-
   const [profile, setProfile] = useState({
     first_name: datosRdxUser.credentials.first_name,
     last_name: datosRdxUser.credentials.last_name,
@@ -99,10 +85,8 @@ export const Profile = () => {
       setProfile(response.data.data);
       setIsEnabled(true);
 
-      // mensaje de OK
     } catch (error) {
       console.error('Error al actualizar el perfil:', error);
-      // manejar errores, mostrar mensajes de error
     }
   };
 
@@ -141,7 +125,7 @@ export const Profile = () => {
           functionProp={functionHandler}
           functionBlur={errorCheck}
         />
-          <CustomInput
+        <CustomInput
           disabled={isEnabled}
           design={`inputDesign ${profileError.emailError !== "" ? "inputDesignError" : ""
             }`}
@@ -162,8 +146,8 @@ export const Profile = () => {
           value={profile.phone}
           functionProp={functionHandler}
           functionBlur={errorCheck}
-          />
-        
+        />
+
         {
           isEnabled
             ? (

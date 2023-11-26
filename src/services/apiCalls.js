@@ -47,7 +47,6 @@ export const updateClient = async (token, body) => {
 }
 
 export const setPrice = async (token, body) => {
-    //console.log(token);
     return await axios.put (`http://localhost:3000/appointment/workerupdate`, body,{
         headers: {
             Authorization: `Bearer ${token}`
@@ -79,6 +78,15 @@ export const allClients = async (token) => {
         }
     })
 }
+
+export const allAppointments = async (token) => {
+    return await axios.get (`http://localhost:3000/appointment/allAppointments`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
 export const createAppointment = (token, body) => {
     return axios.post(`http://localhost:3000/appointment/create`, body, {
       headers: {
@@ -89,7 +97,6 @@ export const createAppointment = (token, body) => {
 };
 
 export const updateAppointment = async (token, body) => {
-    //console.log(token);
     return await axios.put (`http://localhost:3000/appointment/update`, body,{
         headers: {
             Authorization: `Bearer ${token}`
@@ -97,11 +104,12 @@ export const updateAppointment = async (token, body) => {
     })
 }
 
-export const deleteAppointment = async (token, body) => {
-    //console.log(token);
-    return await axios.delete (`http://localhost:3000/appointment/delete`, body,{
+export const deleteAppointment = async (id, token) => {
+    return await axios.delete (`http://localhost:3000/appointment/delete`,{
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
+        data: {id:id}
     })
 }
+

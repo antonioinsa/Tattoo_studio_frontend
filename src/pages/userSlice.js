@@ -4,8 +4,9 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
       credentials: {
-        token: ""
-      }
+        token: "",
+        role: ""
+      },
     },
     
     reducers: {
@@ -20,13 +21,18 @@ export const userSlice = createSlice({
           ...state,
           ...action.payload
         }
-      }
-      
+      },
+      role: (state, action) => {
+        return {
+          ...state,
+          ...action.payload
+        }
+      },
     }
     
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, role } = userSlice.actions;
 
 export const userData = (state) => state.user;
 

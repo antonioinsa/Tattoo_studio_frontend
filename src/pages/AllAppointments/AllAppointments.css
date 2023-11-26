@@ -1,0 +1,89 @@
+.clientsDesign {
+    height: 96vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+}
+
+.viewAllClients {
+    width: 40vw;
+}
+
+.clientItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.line1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.line2 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.line1 div {
+    width: 48%;
+}
+
+.line2 div {
+    width: 60%;
+}
+
+.line {
+    height: 0.1em;
+    width: 100%;
+    background-color: green;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.goTopButton {
+
+    height: 2em;
+    width: 10em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: blue;
+    color: white;
+
+    border-radius: 5%;
+    cursor: pointer;
+    margin-right: 0.3em;
+}
+
+.goTopButton:hover {
+    background-color: rgb(47, 47, 234);
+}
+
+.goToSuperAdmin {
+
+    height: 2em;
+    width: 10em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: blue;
+    color: white;
+
+
+    border-radius: 5%;
+    cursor: pointer;
+    margin-left: 0.3em;
+}
+
+.goToSuperAdmin:hover {
+    background-color: rgb(47, 47, 234);
+}

@@ -10,16 +10,8 @@
 
     background-color: grey;
 }
- .superAdmin{
 
-    width: 100vw;
-    display: flex;
-    justify-items: end;
-    margin-left: 8em;
-color: brown;
- }
-
-.optionsDesign{
+.optionsDesign {
 
     height: 40em;
     width: 20em;
@@ -29,18 +21,22 @@ color: brown;
     justify-content: space-between;
     align-items: center;
 
-    
+
 }
 
-.buttonsDesign{
+.buttonsDesign {
+
+    height: 50vh;
+    width: 100vw;
 
     display: flex;
-    width: 100vw;
     justify-content: space-evenly;
+    align-items: center;
 }
 
-.buttonSa {
 
+
+.buttonSa {
 
     height: 3em;
     width: 10em;
@@ -49,21 +45,17 @@ color: brown;
     justify-content: center;
     align-items: center;
 
-    background-color: black;
+    background-color: orange;
     font-size: x-large;
-    
+    color: black;
+
+    border-radius: 5%;
+
     cursor: pointer;
-    border-radius: 1em;
-    transition: 0.3s;
 }
 
 .buttonSa:hover {
 
     transition: 0.3s;
-    background-color: orange;
-}
-
-.tableInfoDesign{
-    width: 90vw;
-    height: 50vh;
+    background-color: lightsalmon;
 }
