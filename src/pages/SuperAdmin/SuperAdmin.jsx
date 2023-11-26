@@ -20,10 +20,10 @@ export const SuperAdmin = () => {
         <div className="superAdminDesign">
             <div className="buttonsDesign">
                 <Link to="/allclients">
-                <div className="buttonSa">All Clients</div>
+                    <div className="buttonSa">All Clients</div>
                 </Link>
                 <Link to="/allappointments">
-                <div className='buttonSa'>All Appointments</div>
+                    <div className='buttonSa'>All Appointments</div>
                 </Link>
             </div>
         </div>

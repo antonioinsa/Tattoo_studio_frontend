@@ -21,19 +21,19 @@ export const Header = () => {
     navigate('/profile');
   };
 
-  
+
 
   return (
-    
+
     <div className='headerDesign'>
       <LinkButton
-      path={'/'} 
-      title={'Home'}
+        path={'/'}
+        title={'Home'}
       />
-      <LinkButton 
-      path={'/tattooArtist'} 
-      title={'Tattoo Artist'} />
- 
+      <LinkButton
+        path={'/tattooArtist'}
+        title={'Tattoo Artist'} />
+
       {rdxCredentials?.credentials ? (
         <>
           {location.pathname !== '/worker' && location.pathname !== '/administration' && (
@@ -41,7 +41,7 @@ export const Header = () => {
               <LinkButton path={'/profile'} title={'Account'} />
             </div>
           )}
-          
+
           <div onClick={logOutMe}>
             <LinkButton path={'/'} title={'Log out'} />
           </div>

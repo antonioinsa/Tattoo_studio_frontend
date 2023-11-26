@@ -58,7 +58,7 @@ export const AppointmentHistory = () => {
     const deleteCurrentAppointment = async () => {
         try {
             const appointmentIdToDelete = appointments[currentIndex].id
-            const response = await deleteAppointment({ id:appointmentIdToDelete, token});
+            const response = await deleteAppointment({ id: appointmentIdToDelete, token });
             if (response.data.success) {
 
                 const updatedAppointments = [...appointments];
@@ -74,7 +74,7 @@ export const AppointmentHistory = () => {
             }
         } catch (error) {
             console.error(error.response.data.message)
-            setErrorMessage(error. response.data.message)
+            setErrorMessage(error.response.data.message)
         }
     }
 
@@ -85,14 +85,14 @@ export const AppointmentHistory = () => {
             const body = {
                 date: dateToUpdate,
             }
-console.log(body);
-            const response = await updateAppointment (token, body)
+            console.log(body);
+            const response = await updateAppointment(token, body)
 
             setAppointments(prevAppointments => {
                 const updatedAppointments = prevAppointments.map(appointment =>
                     appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
                 )
-                
+
                 return updatedAppointments
             })
 
@@ -101,7 +101,7 @@ console.log(body);
         } catch (error) {
             console.error('Error updating price:', error)
             setErrorMessage('Error updating price or ID not found. Please try again')
-            
+
         }
     }
 
@@ -118,8 +118,8 @@ console.log(body);
                                 type="date"
                                 name="date"
                                 placeholder="Appointment Date"
-                                //functionProp={functionHandler}
-                                //functionBlur={errorCheck}
+                            //functionProp={functionHandler}
+                            //functionBlur={errorCheck}
                             />
                         </div>
                         <div className="auxTwo" onClick={deleteCurrentAppointment}>Delete Appointment</div>

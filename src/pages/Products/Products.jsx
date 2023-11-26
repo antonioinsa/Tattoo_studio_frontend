@@ -8,7 +8,7 @@ export const Product = () => {
 
     const [Products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
-console.log(Products);
+
     useEffect(() => {
 
         if (Products.length === 0) {
@@ -48,7 +48,6 @@ console.log(Products);
                                                 key={product.id}
                                                 article={product.article}
                                                 description={product.description}
-                                                //selected={"selectedCard"}
                                                 selectFunction={() => tellMe(product)}
                                             />
                                         )

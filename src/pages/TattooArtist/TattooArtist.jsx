@@ -9,7 +9,13 @@ export const TattooArtist = () => {
 
     const [TattooArtists, setTattooArtists] = useState([])
     const [loading, setLoading] = useState(true)
-    
+
+    useEffect(() => {
+
+        if (!datosRdxUser.credentials) {
+            navigate("/")
+        }
+    }, [datosRdxUser])
 
     useEffect(() => {
 
@@ -29,7 +35,7 @@ export const TattooArtist = () => {
 
     }, [TattooArtistList])
 
-    
+
     const tellMe = (argumento) => {
         console.log(argumento)
     }

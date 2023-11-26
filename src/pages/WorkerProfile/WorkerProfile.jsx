@@ -17,12 +17,12 @@ export const WorkerProfile = () => {
     const [errorMessage, setErrorMessage] = useState(null)
 
     const appointmentIds = appointments.map(appointment => appointment.id)
-    
+
     const [profile, setProfile] = useState({
         id: '',
         price: ''
     })
-   
+
     const [profileError, setProfileError] = useState({
         id: '',
         price: ''
@@ -88,7 +88,7 @@ export const WorkerProfile = () => {
                 const updatedAppointments = prevAppointments.map(appointment =>
                     appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
                 )
-                
+
                 return updatedAppointments
             })
 
@@ -97,7 +97,7 @@ export const WorkerProfile = () => {
         } catch (error) {
             console.error('Error updating price:', error)
             setErrorMessage('Error updating price or ID not found. Please try again')
-            
+
         }
     }
 

@@ -15,7 +15,7 @@ export const Login = () => {
     const navigate = useNavigate();
     const rdxUserData = useSelector(userData)
     const dispatch = useDispatch();
-    
+
 
 
     const [auth, setAuth] = useState({
@@ -35,7 +35,7 @@ export const Login = () => {
             navigate("/")
         }
     }, [rdxUserData])
-console.log(rdxUserData);
+
     const [checked, setChecked] = useState(false)
 
     const switchHandler = (e) => {
@@ -86,7 +86,7 @@ console.log(rdxUserData);
                         } else {
                             dispatch(login({ credentials: response.data.token }))
                             let decoded = jwtDecode(response.data.token)
-                            dispatch(login({role: decoded.role}))
+                            dispatch(login({ role: decoded.role }))
                             setTimeout(() => {
                                 navigate("/")
                             }, 500);
@@ -110,7 +110,7 @@ console.log(rdxUserData);
                         } else {
                             dispatch(login({ credentials: response.data.token }))
                             let decoded = jwtDecode(response.data.token)
-                            dispatch(login({role: decoded.role}))
+                            dispatch(login({ role: decoded.role }))
                             setTimeout(() => {
                                 if (decoded.role === "superAdmin") {
                                     navigate("/administration")

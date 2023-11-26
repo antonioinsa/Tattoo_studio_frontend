@@ -30,10 +30,10 @@ export const AllAppointments = () => {
                 }
             };
             getAllAppointments()
-            
+
         }
     }, [datosRdxUser.role])
-    
+
     const goToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -70,7 +70,7 @@ export const AllAppointments = () => {
                             </div>
                         </div>
                         <div className="lineTwo">
-                        <div>
+                            <div>
                                 <span>Article: </span>
                                 <span>{appointments.article}</span>
                             </div>
@@ -97,9 +97,9 @@ export const AllAppointments = () => {
             </div>
             <button className="goTopButton" onClick={goToTop}>Go top</button>
             <Link to='/administration'>
-            <div className="goToSuperAdmin">Go to SuperAdmin</div>
+                <div className="goToSuperAdmin">Go to SuperAdmin</div>
             </Link>
         </div>
     )
-    
+
 }
