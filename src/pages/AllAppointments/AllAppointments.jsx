@@ -24,7 +24,7 @@ export const AllAppointments = () => {
             const getAllAppointments = async () => {
                 try {
                     const response = await allAppointments(token)
-                    setAllAppointmentsList(response.data.data)
+                    setAllAppointmentsList(response.data.appointments) 
                 } catch (error) {
                     console.error('Error al obtener el perfil:', error)
                 }

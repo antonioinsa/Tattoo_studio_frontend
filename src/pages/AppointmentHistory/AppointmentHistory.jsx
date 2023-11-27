@@ -57,7 +57,7 @@ export const AppointmentHistory = () => {
 
     const deleteCurrentAppointment = async () => {
         try {
-            const appointmentIdToDelete = appointments[currentIndex].id
+            const appointmentIdToDelete = parseInt()
             const response = await deleteAppointment({ id: appointmentIdToDelete, token });
             if (response.data.success) {
 
@@ -122,6 +122,7 @@ export const AppointmentHistory = () => {
                             //functionBlur={errorCheck}
                             />
                         </div>
+                        <div><input type="text" className="deleteId" ></input></div>
                         <div className="auxTwo" onClick={deleteCurrentAppointment}>Delete Appointment</div>
                         <div className='errorMsg'>{errorMessage}</div>
                     </div>
