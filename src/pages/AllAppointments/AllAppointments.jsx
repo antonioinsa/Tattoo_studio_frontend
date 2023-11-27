@@ -24,7 +24,7 @@ export const AllAppointments = () => {
             const getAllAppointments = async () => {
                 try {
                     const response = await allAppointments(token)
-                    setAllAppointmentsList(response.data.appointments) 
+                    setAllAppointmentsList(response.data.appointments)
                 } catch (error) {
                     console.error('Error al obtener el perfil:', error)
                 }
@@ -45,10 +45,6 @@ export const AllAppointments = () => {
                     <div key={appointments.id} className="appointmentItem">
                         <div className="lineOne">
                             <div>
-                                <span>Id_appointment: </span>
-                                <span>{appointments.id_appointment}</span>
-                            </div>
-                            <div>
                                 <span>Worker_first_name: </span>
                                 <span>{appointments.worker_first_name}</span>
                             </div>
@@ -65,30 +61,34 @@ export const AllAppointments = () => {
                                 <span>{appointments.client_last_name}</span>
                             </div>
                             <div>
-                                <span>Type: </span>
-                                <span>{appointments.type}</span>
+                                <span>Price: </span>
+                                <span>{appointments.price}</span>
                             </div>
-                        </div>
-                        <div className="lineTwo">
                             <div>
                                 <span>Article: </span>
                                 <span>{appointments.article}</span>
                             </div>
                             <div>
+                                <span>Type: </span>
+                                <span>{appointments.type}</span>
+                            </div>
+                            <div>
                                 <span>Description: </span>
                                 <span>{appointments.description}</span>
                             </div>
+                        </div>
+                        <div>
+                            <span>Appointment_date: </span>
+                            <span>{appointments.appointment_date}</span>
+                        </div>
+                        <div>
+                            <span>Last_updated: </span>
+                            <span>{appointments.last_updated}</span>
+                        </div>
+                        <div className="line">
                             <div>
-                                <span>Price: </span>
-                                <span>{appointments.price}</span>
-                            </div>
-                            <div>
-                                <span>Appointment_date: </span>
-                                <span>{appointments.appointment_date}</span>
-                            </div>
-                            <div>
-                                <span>Last_updated: </span>
-                                <span>{appointments.last_updated}</span>
+                                <span>Id_appointment: </span>
+                                <span>{appointments.id_appointment}</span>
                             </div>
                         </div>
                         {index < allAppointmentsList.length - 1 && <div className="Line"></div>}

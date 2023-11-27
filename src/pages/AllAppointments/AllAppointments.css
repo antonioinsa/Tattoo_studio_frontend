@@ -8,33 +8,15 @@
 }
 
 .viewAllAppointments {
-    width: 40vw;
+    
+    height: 90vh;
+    width: 45vw;
 }
 
 .appointmentItem {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
-}
-
-.lineOne {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.lineTwo {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.lineOne div {
-    width: 48%;
-}
-
-.lineTwo div {
-    width: 60%;
 }
 
 .line {
