@@ -5,103 +5,123 @@ import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { clientAppointment, deleteAppointment, updateAppointment } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { validator } from "../../services/useful";
 
 export const AppointmentHistory = () => {
-    const navigate = useNavigate();
-    const datosRdxUser = useSelector(userData);
+    const navigate = useNavigate()
+    const datosRdxUser = useSelector(userData)
     const token = datosRdxUser.credentials;
 
-    const [appointments, setAppointments] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [errorMessage, setErrorMessage] = useState('')
+    const [appointments, setAppointments] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [msgError, setMsgError] = useState('')
 
     useEffect(() => {
         if (!datosRdxUser.credentials) {
-            navigate("/");
+            navigate("/")
         }
-    }, [datosRdxUser, navigate]);
+    }, [datosRdxUser, navigate])
 
+
+    const [editDate, setEditDate] = useState({
+        id: '',
+        date: ''
+    })
+    console.log(editDate);
+
+    const [editDateError, setEditDateError] = useState({
+        idError: '',
+        dateError: ''
+    })
+
+    const functionHandler = (e) => {
+        setEditDate((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    const errorCheck = (e) => {
+
+        let error = ""
+
+        error = validator(e.target.name, e.target.value)
+
+        setEditDateError((prevState) => ({
+            ...prevState,
+            [e.target.name + 'Error']: error,
+        }))
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await clientAppointment(token);
+                const response = await clientAppointment(token)
                 if (response.data.success) {
-                    const sortedAppointments = response.data.appointments.sort((a, b) => new Date(b.appointment_date) - new Date(a.appointment_date));
-                    setAppointments(sortedAppointments);
-                    console.log(response.data.appointments);
-                } else {
-                    console.error(response.data.message);
+                    const sortedAppointments = response.data.appointments.sort((a, b) =>
+                        new Date(b.appointment_date) - new Date(a.appointment_date))
+                    setAppointments(sortedAppointments)
                 }
             } catch (error) {
-                console.error(error.response.data.message);
+                console.log(error)
+                setMsgError(error.message)
             }
         }
 
-        fetchData();
-    }, [token]);
+        fetchData()
+    }, [token])
 
     const showNextAppointments = () => {
         const nextIndex = currentIndex + 1
         if (nextIndex < appointments.length) {
-            setCurrentIndex(nextIndex);
+            setCurrentIndex(nextIndex)
         }
     }
 
     const showPreviousAppointments = () => {
         const prevIndex = currentIndex - 1
         if (prevIndex >= 0) {
-            setCurrentIndex(prevIndex);
+            setCurrentIndex(prevIndex)
         }
     }
 
-    const deleteCurrentAppointment = async () => {
+    const deleteIdAppointment = async () => {
         try {
-            const appointmentIdToDelete = parseInt()
-            const response = await deleteAppointment({ id: appointmentIdToDelete, token });
+            const appointmentIdToDelete = parseInt(editDate.id)
+            const response = await deleteAppointment({ id: appointmentIdToDelete, token })
+
             if (response.data.success) {
-
-                const updatedAppointments = [...appointments];
-                updatedAppointments.splice(currentIndex, 1);
-                setAppointments(updatedAppointments);
-
-                if (currentIndex >= updatedAppointments.length) {
-                    setCurrentIndex(updatedAppointments.length - 1);
-                }
-            } else {
-                console.error(response.data.message)
-                setErrorMessage(response.data.message)
+                setAppointments(prevAppointments =>
+                    prevAppointments.filter(appointment => appointment.id !== appointmentIdToDelete)
+                )
             }
+
         } catch (error) {
-            console.error(error.response.data.message)
-            setErrorMessage(error.response.data.message)
+            console.log(error)
+            setMsgError(error.message)
         }
     }
 
     const updateDate = async () => {
         try {
-            const dateToUpdate = appointments[currentIndex].appointment_date
-
             const body = {
-                date: dateToUpdate,
+                id: editDate.id,
+                date: editDate.date
             }
-            console.log(body);
+
             const response = await updateAppointment(token, body)
 
-            setAppointments(prevAppointments => {
-                const updatedAppointments = prevAppointments.map(appointment =>
-                    appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
+            if (response.data.success) {
+                setAppointments(prevAppointments =>
+                    prevAppointments.map(appointment =>
+                        appointment.id === editDate.id ? { ...appointment, date: editDate.date } : appointment
+                    )
                 )
+            }
 
-                return updatedAppointments
-            })
-
-            setSuccessMessage('Price updated successfully')
-            setErrorMessage(null)
         } catch (error) {
-            console.error('Error updating price:', error)
-            setErrorMessage('Error updating price or ID not found. Please try again')
-
+            console.log(error)
+            setMsgError(error.message)
         }
     }
 
@@ -118,19 +138,28 @@ export const AppointmentHistory = () => {
                                 type="date"
                                 name="date"
                                 placeholder="Appointment Date"
-                            //functionProp={functionHandler}
-                            //functionBlur={errorCheck}
+                                functionProp={functionHandler}
+                                functionBlur={errorCheck}
+                            />
+                            <CustomInput
+                                disabled={false}
+                                design="inputDesign"
+                                type="text"
+                                name="id"
+                                placeholder="Id"
+                                functionProp={functionHandler}
+                                functionBlur={errorCheck}
                             />
                         </div>
-                        <div><input type="text" className="deleteId" ></input></div>
-                        <div className="auxTwo" onClick={deleteCurrentAppointment}>Delete Appointment</div>
-                        <div className='errorMsg'>{errorMessage}</div>
+                        <div className="auxTwo" onClick={deleteIdAppointment}>Delete Appointment</div>
+                        <div className='errorMsg'>{msgError}</div>
                     </div>
                 </div>
                 <div className="tableAppointmentDesign">
                     {appointments.slice(currentIndex, currentIndex + 1).map((appointment, index) => (
                         <div key={index} className={`appointmentRow ${index % 2 === 0 ? 'even' : 'odd'}`}>
                             <p className="name">Tattoo artist: {appointment.tattoo_artist}</p>
+                            <p>Id: {appointment.id}</p>
                             <p>Intervention tipe: {appointment.type}</p>
                             <p>Price: {appointment.price}</p>
                             <p>Appointment date: {appointment.appointment_date}</p>
@@ -148,5 +177,5 @@ export const AppointmentHistory = () => {
                 </div>
             </div>
         </>
-    );
+    )
 }

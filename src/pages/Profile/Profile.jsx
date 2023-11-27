@@ -38,7 +38,7 @@ export const Profile = () => {
         console.log('Respuesta del servidor:', response.data.data)
         setProfile(response.data.data)
       } catch (error) {
-        console.error('Error al obtener el perfil:', error)
+        console.log('Error al obtener el perfil:', error)
       }
     }
     getProfile()
@@ -86,7 +86,7 @@ export const Profile = () => {
       setIsEnabled(true);
 
     } catch (error) {
-      console.error('Error al actualizar el perfil:', error);
+      console.log('Error al actualizar el perfil:', error);
     }
   };
 
@@ -96,7 +96,7 @@ export const Profile = () => {
       const response = await dataClient(token);
       setProfile(response.data.data);
     } catch (error) {
-      console.error('Error al obtener el perfil:', error);
+      console.log('Error al obtener el perfil:', error);
     }
   }
 

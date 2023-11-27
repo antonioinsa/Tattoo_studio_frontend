@@ -24,8 +24,8 @@ export const WorkerProfile = () => {
     })
 
     const [editAppointmentError, setEditAppointmentError] = useState({
-        id: '',
-        price: ''
+        idError: '',
+        priceError: ''
     })
 
     useEffect(() => {
@@ -62,7 +62,7 @@ export const WorkerProfile = () => {
                 }
             } catch (error) {
                 console.log(error);
-                setMsgError(error.message);
+                setMsgError(error.message)
             }
         }
 
@@ -87,8 +87,8 @@ export const WorkerProfile = () => {
             })
 
         } catch (error) {
-            console.log(error);
-            setMsgError(error.message);
+            console.log(error)
+            setMsgError(error.message)
 
         }
     }

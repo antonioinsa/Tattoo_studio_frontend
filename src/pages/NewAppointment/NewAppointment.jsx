@@ -16,12 +16,17 @@ export const NewAppointment = () => {
   const [appointment, setAppointment] = useState({
     date: '',
     article: ''
-  });
+  })
 
   const [appointmentError, setAppointmentError] = useState({
     dateError: '',
     articleError: ''
-  });
+  })
+
+  const dateAndTime = () => {
+    const [value, setValue] = useState < Date | null > (null)
+    return <DateTimePicker value={value} onChange={setValue} />
+  }
 
   useEffect(() => {
     if (token) {
@@ -64,10 +69,8 @@ export const NewAppointment = () => {
     <div className="allView">
       <div className="createAppointmentDesign">
         <DateTimePicker
-          design={`inputDesign ${appointmentError.articleError !== "" ? 'inputDesignError' : ''}`}
           valueFormat={"DD MMM YYYY hh:mm A"}
-          functionProp={functionHandler}
-          label={""}
+          functionProp={dateAndTime}
           placeholder={"Pick date and time"}
         />
         <div className='errorMsg'>{appointmentError.dateError}</div>
