@@ -14,16 +14,16 @@ export const WorkerProfile = () => {
 
     const [appointments, setAppointments] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [errorMessage, setErrorMessage] = useState(null)
+    const [msgError, setMsgError] = useState('')
 
-    const appointmentIds = appointments.map(appointment => appointment.id)
+    appointments.map(appointment => appointment.id)
 
-    const [profile, setProfile] = useState({
+    const [editAppointment, setEditAppointment] = useState({
         id: '',
         price: ''
     })
 
-    const [profileError, setProfileError] = useState({
+    const [editAppointmentError, setEditAppointmentError] = useState({
         id: '',
         price: ''
     })
@@ -41,14 +41,14 @@ export const WorkerProfile = () => {
 
         error = validator(e.target.name, e.target.value)
 
-        setProfileError((prevState) => ({
+        setEditAppointmentError((prevState) => ({
             ...prevState,
             [e.target.name + 'Error']: error,
         }))
     }
 
     const functionHandler = (e) => {
-        setProfile((prevState) => ({
+        setEditAppointment((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
@@ -59,44 +59,36 @@ export const WorkerProfile = () => {
                 const response = await workerAppointment(token)
                 if (response.data.success) {
                     setAppointments(response.data.appointments)
-                } else {
-                    console.error(response.data.message)
                 }
             } catch (error) {
-                console.error('Error fetching appointments', error)
+                console.log(error);
+                setMsgError(error.message);
             }
         }
 
         fetchData()
-    }, [token])
+    }, [token, appointments])
 
     const updatePrice = async () => {
         try {
-            if (!profile.id || !profile.price) {
-                setErrorMessage('ID and Price are required')
-                return
-            }
-
             const body = {
-                id: profile.id,
-                price: profile.price
+                id: editAppointment.id,
+                price: editAppointment.price
             }
 
-            const response = await setPrice(token, body)
+            await setPrice(token, body)
 
             setAppointments(prevAppointments => {
                 const updatedAppointments = prevAppointments.map(appointment =>
-                    appointment.id === profile.id ? { ...appointment, price: profile.price } : appointment
+                    appointment.id === editAppointment.id ? { ...appointment, price: editAppointment.price } : appointment
                 )
 
                 return updatedAppointments
             })
 
-            setSuccessMessage('Price updated successfully')
-            setErrorMessage(null)
         } catch (error) {
-            console.error('Error updating price:', error)
-            setErrorMessage('Error updating price or ID not found. Please try again')
+            console.log(error);
+            setMsgError(error.message);
 
         }
     }
@@ -118,7 +110,7 @@ export const WorkerProfile = () => {
                     type="text"
                     name="id"
                     placeholder="Id"
-                    value={profile.id}
+                    value={editAppointment.id}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                 />
@@ -128,12 +120,12 @@ export const WorkerProfile = () => {
                     type="text"
                     name="price"
                     placeholder="Price"
-                    value={profile.price}
+                    value={editAppointment.price}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                 />
                 <div className="setPrice" onClick={updatePrice}>Set price of product</div>
-                {errorMessage && (<div className="error-message">{errorMessage}</div>)}
+                <div className='MsgError'>{msgError}</div>
             </div>
             <div className="appointmentDesign">
                 <div className="tableAppointment">
