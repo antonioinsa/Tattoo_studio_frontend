@@ -15,9 +15,9 @@ export const AllClients = () => {
     useEffect(() => {
 
         if (!token && !role === 'superAdmin') {
-          navigate("/")
+            navigate("/")
         }
-      }, [datosRdxUser])
+    }, [datosRdxUser])
 
     const [allClientsList, setAllClientsList] = useState([])
 
@@ -80,7 +80,6 @@ export const AllClients = () => {
                     </div>
                 ))}
             </div>
-            <button className="goTopButton" onClick={goToTop}>Go top</button>
             <Link to='/administration'>
                 <div className="goToSuperAdmin">Go to SuperAdmin</div>
             </Link>

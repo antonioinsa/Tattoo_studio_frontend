@@ -15,9 +15,9 @@ export const AllAppointments = () => {
     useEffect(() => {
 
         if (!token && !role === 'superAdmin') {
-          navigate("/")
+            navigate("/")
         }
-      }, [datosRdxUser])
+    }, [datosRdxUser])
 
     const [allAppointmentsList, setAllAppointmentsList] = useState([])
 
@@ -36,15 +36,18 @@ export const AllAppointments = () => {
         }
     }, [datosRdxUser.role])
 
-    const goToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
     return (
         <div className="appointmentsDesign">
             <div className="viewAllAppointments">
                 {allAppointmentsList.map((appointments, index) => (
                     <div key={appointments.id} className="appointmentItem">
+                        <div className="line">
+                            <div>
+                                <span>Id_appointment: </span>
+                                <span>{appointments.id_appointment}</span>
+                            </div>
+                        </div>
+                        <br />
                         <div className="lineOne">
                             <div>
                                 <span>Worker_first_name: </span>
@@ -87,17 +90,10 @@ export const AllAppointments = () => {
                             <span>Last_updated: </span>
                             <span>{appointments.last_updated}</span>
                         </div>
-                        <div className="line">
-                            <div>
-                                <span>Id_appointment: </span>
-                                <span>{appointments.id_appointment}</span>
-                            </div>
-                        </div>
                         {index < allAppointmentsList.length - 1 && <div className="Line"></div>}
                     </div>
                 ))}
             </div>
-            <button className="goTopButton" onClick={goToTop}>Go top</button>
             <Link to='/administration'>
                 <div className="goToSuperAdmin">Go to SuperAdmin</div>
             </Link>

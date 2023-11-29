@@ -11,12 +11,13 @@
     
     height: 90vh;
     width: 45vw;
+    overflow: auto;
 }
 
 .appointmentItem {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 .line {
@@ -25,27 +26,6 @@
     background-color: green;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-}
-
-.goTopButton {
-
-    height: 2em;
-    width: 10em;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: blue;
-    color: white;
-
-    border-radius: 5%;
-    cursor: pointer;
-    margin-right: 0.3em;
-}
-
-.goTopButton:hover {
-    background-color: rgb(47, 47, 234);
 }
 
 .goToSuperAdmin {
