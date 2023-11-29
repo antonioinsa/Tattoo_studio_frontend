@@ -14,11 +14,14 @@ export const TattooCard = ({ first_name, last_name, photo, nationality, selected
    }
 
    return (
+      <>
+      <div className='clickMe'>Click Me for products</div>
       <div className={`tattooCardDesign ${!change ? selected : ''}`} onClick={callSelectClick}>
          <div><img className='avatar' src={photo} alt={name} /></div>
          <div className='text'>{first_name}</div>
          <div className='text'>{last_name}</div>
          <div className='text'>- {nationality} -</div>
       </div>
+      </>
    )
 }

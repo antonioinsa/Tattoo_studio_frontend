@@ -1,4 +1,4 @@
-.productCardDesign {
+.productCardsDesign {
 
     height: 20em;
     width: 18em;
@@ -20,18 +20,13 @@
     margin: 1em;
 }
 
-.productCardDesign:hover {
+.productCardsDesign:hover {
 
     transform: scale(1.2);
     transition: 1s;
 }
 
-.selectedCard {
-
-    background-color: rgb(72, 142, 241);
-}
-
-.avatar {
+.avatares {
 
     height: 13em;
     width: 12em;

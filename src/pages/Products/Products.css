@@ -1,26 +1,24 @@
-.body{
+.body {
     height: 96vh;
     width: 100vw;
 
     display: flex;
-    
+
 }
+
 .productDesign {
-    
+
     flex-direction: column;
     justify-content: center;
+    background-color: rgb(43, 40, 40);
 
-    background-image: url("../../Images/wallpaperTattoArtist.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .productRoster {
 
     display: grid;
     justify-content: center;
-    grid-template-columns:repeat(auto-fill, minmax(5em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
     gap: 1em;
     display: flex;
     flex-wrap: wrap;

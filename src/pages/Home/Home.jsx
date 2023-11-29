@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
 import "./Home.css";
 
@@ -6,7 +7,9 @@ export const Home = () => {
         <div className="global">
             <div className="homeDesign">
                 <div className="logo">
-                    <img draggable="false" src="./src/Images/zaharia_logo.png" className="portada"></img>
+                    <Link to="/register">
+                        <img draggable="false" src="./src/Images/zaharia_logo.png" className="portada" alt="Logo" />
+                    </Link>
                 </div>
                 <div>
                     <LinkButton

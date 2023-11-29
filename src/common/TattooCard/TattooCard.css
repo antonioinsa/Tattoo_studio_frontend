@@ -26,11 +26,6 @@
     transition: 1s;
 }
 
-.selectedCard {
-
-    background-color: rgb(72, 142, 241);
-}
-
 .avatar {
 
     height: 13em;
@@ -39,5 +34,11 @@
 }
 
 .text{
+    font-weight: bolder;
+}
+
+.clickMe{
+    color: white;
+    font-size: larger;
     font-weight: bolder;
 }

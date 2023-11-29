@@ -21,26 +21,51 @@ export const Header = () => {
     navigate('/profile');
   };
 
+  const appointment = () => {
+    navigate('/newappointment');
+  };
+
 
 
   return (
-
     <div className='headerDesign'>
-      <LinkButton
-        path={'/'}
-        title={'Home'}
-      />
-      <LinkButton
-        path={'/tattooArtist'}
-        title={'Tattoo Artist'} />
+      <>
+        {location.pathname !== '/worker' &&
+          location.pathname !== '/administration' &&
+          location.pathname !== '/allclients' &&
+          location.pathname !== '/allappointments' && (
+            <div>
+              <LinkButton path={'/'} title={'Home'} />
+            </div>
+          )}
+        {location.pathname !== '/worker' &&
+          location.pathname !== '/administration' &&
+          location.pathname !== '/allclients' &&
+          location.pathname !== '/allappointments' && (
+            <div>
+              <LinkButton path={'/tattooArtist'} title={'Tattoo Artist'} />
+            </div>
+          )}
+      </>
 
       {rdxCredentials?.credentials ? (
         <>
-          {location.pathname !== '/worker' && location.pathname !== '/administration' && (
-            <div onClick={profile}>
-              <LinkButton path={'/profile'} title={'Account'} />
-            </div>
-          )}
+          {location.pathname !== '/worker' &&
+            location.pathname !== '/administration' &&
+            location.pathname !== '/allclients' &&
+            location.pathname !== '/allappointments' && (
+              <div onClick={appointment}>
+                <LinkButton path={'/newappointment'} title={'New Appointment'} />
+              </div>
+            )}
+          {location.pathname !== '/worker' &&
+            location.pathname !== '/administration' &&
+            location.pathname !== '/allclients' &&
+            location.pathname !== '/allappointments' && (
+              <div onClick={profile}>
+                <LinkButton path={'/profile'} title={'Account'} />
+              </div>
+            )}
 
           <div onClick={logOutMe}>
             <LinkButton path={'/'} title={'Log out'} />
@@ -49,6 +74,6 @@ export const Header = () => {
       ) : (
         <LinkButton path={'/login'} title={'Login/Register'} />
       )}
-    </div>
+    </div >
   );
 };

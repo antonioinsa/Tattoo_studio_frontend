@@ -88,6 +88,7 @@ export const allAppointments = async (token) => {
 }
 
 export const createAppointment = (token, body) => {
+    console.log(token);
     return axios.post(`http://localhost:3000/appointment/create`, body, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -104,12 +105,11 @@ export const updateAppointment = async (token, body) => {
     })
 }
 
-export const deleteAppointment = async (id, token) => {
-    return await axios.delete (`http://localhost:3000/appointment/delete`,{
+export const deleteAppointment = async (token, body) => {
+    return await axios.delete (`http://localhost:3000/appointment/delete`, body,{
         headers: {
             Authorization: `Bearer ${token}`
-        },
-        data: {id:id}
+        }
     })
 }
 

@@ -7,7 +7,7 @@ import { validator } from "../../services/useful";
 import { ChoiceSwitch } from "../../common/inputSwitch/Input ";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { login, userData } from "../userSlice";
+import { login, role, userData } from "../userSlice";
 import { jwtDecode } from "jwt-decode";
 
 export const Login = () => {
@@ -103,14 +103,13 @@ export const Login = () => {
             logWorker(auth)
                 .then(
                     (response) => {
-                        console.log(response);
-
                         if (response.error) {
                             setError("Invalid Email or Password")
                         } else {
                             dispatch(login({ credentials: response.data.token }))
                             let decoded = jwtDecode(response.data.token)
                             dispatch(login({ role: decoded.role }))
+
                             setTimeout(() => {
                                 if (decoded.role === "superAdmin") {
                                     navigate("/administration")

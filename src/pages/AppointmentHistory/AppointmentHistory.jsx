@@ -6,28 +6,31 @@ import { userData } from "../userSlice";
 import { clientAppointment, deleteAppointment, updateAppointment } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
+import dayjs from "dayjs";
 
 export const AppointmentHistory = () => {
     const navigate = useNavigate()
     const datosRdxUser = useSelector(userData)
-    const token = datosRdxUser.credentials;
+    const token = datosRdxUser.credentials
+    const role = datosRdxUser.role
+
 
     const [appointments, setAppointments] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
     const [msgError, setMsgError] = useState('')
 
     useEffect(() => {
-        if (!datosRdxUser.credentials) {
+
+        if (!token && !role === 'user') {
             navigate("/")
         }
-    }, [datosRdxUser, navigate])
+    }, [datosRdxUser])
 
 
     const [editDate, setEditDate] = useState({
         id: '',
         date: ''
     })
-    console.log(editDate);
 
     const [editDateError, setEditDateError] = useState({
         idError: '',
@@ -69,7 +72,7 @@ export const AppointmentHistory = () => {
         }
 
         fetchData()
-    }, [token])
+    }, [])
 
     const showNextAppointments = () => {
         const nextIndex = currentIndex + 1
@@ -87,8 +90,10 @@ export const AppointmentHistory = () => {
 
     const deleteIdAppointment = async () => {
         try {
-            const appointmentIdToDelete = parseInt(editDate.id)
-            const response = await deleteAppointment({ id: appointmentIdToDelete, token })
+            console.log(token);
+            const id = { id: editDate.id }
+            const body = parseInt(id)
+            const response = await deleteAppointment(token, body)
 
             if (response.data.success) {
                 setAppointments(prevAppointments =>
@@ -104,9 +109,10 @@ export const AppointmentHistory = () => {
 
     const updateDate = async () => {
         try {
+            const dateBody = dayjs(editDate.date, "'{AAAA} MM-DDTHH:mm:ss SSS [Z] A'");
             const body = {
                 id: editDate.id,
-                date: editDate.date
+                date: dateBody
             }
 
             const response = await updateAppointment(token, body)
@@ -164,7 +170,7 @@ export const AppointmentHistory = () => {
                             <p>Price: {appointment.price}</p>
                             <p>Appointment date: {appointment.appointment_date}</p>
                             <p>Description: {appointment.description}</p>
-                            <p>Article: {appointment.article}</p>
+                            {/* <p>Article: {appointment.article}</p> */}
                         </div>
                     ))}
                     <div className="navigationButtons">

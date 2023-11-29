@@ -6,30 +6,33 @@ import { validator } from "../../services/useful";
 import { createAppointment } from "../../services/apiCalls"
 import { useSelector } from "react-redux";
 import { userData } from "../../pages/userSlice";
-import { DateTimePicker } from "@mantine/dates";
+import dayjs from "dayjs";
+
 
 export const NewAppointment = () => {
   const rdxCredentials = useSelector(userData);
-  const token = rdxCredentials.credentials.token;
+  const token = rdxCredentials.credentials;
+  const role = rdxCredentials.role
   const navigate = useNavigate();
+
+  const [successMessage, setSuccessMessage] = useState('')
+  const [messageError, setMsgError] = useState('')
 
   const [appointment, setAppointment] = useState({
     date: '',
+    time: '',
     article: ''
   })
 
   const [appointmentError, setAppointmentError] = useState({
     dateError: '',
+    timeError: '',
     articleError: ''
   })
 
-  const dateAndTime = () => {
-    const [value, setValue] = useState < Date | null > (null)
-    return <DateTimePicker value={value} onChange={setValue} />
-  }
-
   useEffect(() => {
-    if (token) {
+
+    if (!token && !role === 'user') {
       navigate("/")
     }
   }, [rdxCredentials])
@@ -42,38 +45,59 @@ export const NewAppointment = () => {
   };
 
   const errorCheck = (e) => {
-    let error = validator(e.target.name, e.target.value);
+    let error = validator(e.target.name, e.target.value)
     setAppointmentError((prevState) => ({
       ...prevState,
       [e.target.name + 'Error']: error,
     }));
   };
 
-  const [message, setMessage] = useState('');
+  const newAppointmentClient = () => {
+    try {
+      const combinedDateTime = `${appointment.date}T${appointment.time}:00.000Z`
+      const dateBody = dayjs(combinedDateTime)
 
-  const Submit = () => {
-    if (!appointmentError.dateError && !appointmentError.articleError) {
-      createAppointment(token, appointment)
-        .then((result) => {
-          const { message } = result;
-          setMessage(message);
-          createAppointment();
-        })
-        .catch((error) => {
-          console.error('Error al crear la cita:', error);
-        });
+      const formattedDate = dateBody.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+
+      const body = {
+        date: formattedDate,
+        article: appointment.article
+      }
+
+      createAppointment(token, body)
+      setSuccessMessage('Created Appointment')
+      setTimeout(() => {
+        navigate("/profile")
+      }, 500);
+
+
+    } catch (error) {
+      console.log(error)
+      setMsgError(error)
     }
-  };
-  console.log(appointment);
+  }
+
   return (
     <div className="allView">
       <div className="createAppointmentDesign">
-        <DateTimePicker
-          valueFormat={"DD MMM YYYY hh:mm A"}
-          functionProp={dateAndTime}
-          placeholder={"Pick date and time"}
+        <CustomInput
+          design="inputDesign"
+          type="date"
+          name="date"
+          placeholder="Appointment Date"
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
         />
-        <div className='errorMsg'>{appointmentError.dateError}</div>
+        <div className='errorMsg'>{appointmentError.timeError}</div>
+        <CustomInput
+          design="inputDesign"
+          type="time"
+          name="time"
+          placeholder="Time Date"
+          functionProp={functionHandler}
+          functionBlur={errorCheck}
+        />
+        <div className='errorMsg'>{appointmentError.timeError}</div>
         <CustomInput
           design={`inputDesign ${appointmentError.articleError !== "" ? 'inputDesignError' : ''}`}
           type={"text"}
@@ -84,8 +108,9 @@ export const NewAppointment = () => {
           functionBlur={errorCheck}
         />
         <div className='errorMsg'>{appointmentError.articleError}</div>
-        <div className='buttonSubmit' onClick={Submit}>Create appointment</div>
-        {message && <div className='successMsg'>{message}</div>}
+        <div className='buttonSubmit' onClick={newAppointmentClient}>Create appointment</div>
+        {successMessage && <div className='successMsg'>{successMessage}</div>}
+        {messageError && <div className='successMsg'>{messageError}</div>}
       </div>
     </div>
   );

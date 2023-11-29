@@ -13,6 +13,7 @@ export const Profile = () => {
   const navigate = useNavigate()
   const datosRdxUser = useSelector(userData)
   const token = datosRdxUser.credentials
+  const role = datosRdxUser.role
 
   const [profile, setProfile] = useState({
     first_name: datosRdxUser.credentials.first_name,
@@ -32,10 +33,16 @@ export const Profile = () => {
   const [isEnabled, setIsEnabled] = useState(true)
 
   useEffect(() => {
+
+    if (!token && !role === 'user') {
+      navigate("/")
+    }
+  }, [datosRdxUser])
+
+  useEffect(() => {
     const getProfile = async () => {
       try {
         const response = await dataClient(token)
-        console.log('Respuesta del servidor:', response.data.data)
         setProfile(response.data.data)
       } catch (error) {
         console.log('Error al obtener el perfil:', error)
@@ -44,12 +51,6 @@ export const Profile = () => {
     getProfile()
   }, [token])
 
-  useEffect(() => {
-
-    if (!datosRdxUser.credentials) {
-      navigate("/")
-    }
-  }, [datosRdxUser])
 
   const errorCheck = (e) => {
 
@@ -170,6 +171,9 @@ export const Profile = () => {
           </Link>
           < Link to="/newappointment">
             <div className="buttonAppointments">New appointment</div>
+          </Link>
+          < Link to="/products">
+            <div className="buttonAppointments">Products galery</div>
           </Link>
         </div>
       </div>

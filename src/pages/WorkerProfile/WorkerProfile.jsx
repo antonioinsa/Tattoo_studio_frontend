@@ -11,6 +11,7 @@ export const WorkerProfile = () => {
     const navigate = useNavigate()
     const datosRdxUser = useSelector(userData)
     const token = datosRdxUser.credentials
+    const role = datosRdxUser.role
 
     const [appointments, setAppointments] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -30,7 +31,7 @@ export const WorkerProfile = () => {
 
     useEffect(() => {
 
-        if (!datosRdxUser.credentials) {
+        if (!token && !role === 'admin') {
             navigate("/")
         }
     }, [datosRdxUser])

@@ -26,17 +26,11 @@ export const Product = () => {
         }
 
     }, [Products])
-
-    const tellMe = (argumento) => {
-        console.log(argumento)
-    }
-
-
+    
     return (
         <div className='body'>
             <div className='productDesign'>
                 {
-
                     Products.length > 0
 
                         ? (
@@ -48,7 +42,8 @@ export const Product = () => {
                                                 key={product.id}
                                                 article={product.article}
                                                 description={product.description}
-                                                selectFunction={() => tellMe(product)}
+                                                product_id={product.id}
+
                                             />
                                         )
 

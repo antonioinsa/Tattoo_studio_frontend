@@ -10,12 +10,14 @@ export const AllAppointments = () => {
     const navigate = useNavigate()
     const datosRdxUser = useSelector(userData)
     const token = datosRdxUser.credentials
+    const role = datosRdxUser.role
 
     useEffect(() => {
-        if (!datosRdxUser.credentials) {
-            navigate("/")
+
+        if (!token && !role === 'superAdmin') {
+          navigate("/")
         }
-    }, [datosRdxUser])
+      }, [datosRdxUser])
 
     const [allAppointmentsList, setAllAppointmentsList] = useState([])
 

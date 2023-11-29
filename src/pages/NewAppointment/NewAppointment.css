@@ -2,11 +2,15 @@
 
     height: 96vh;
     width: 100vw;
-    flex-direction: column;
+    
+    display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: gray;
+    background-image: url("../../Images/wallpaperHand.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .createAppointmentDesign {
@@ -33,4 +37,10 @@
     
     height: 80vh;
     width: 100vw;
+}
+
+.successMsg{
+    font-size: larger;
+    font-weight: bolder;
+    color: wheat;
 }
