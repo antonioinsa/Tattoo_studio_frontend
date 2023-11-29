@@ -26,6 +26,10 @@ export const AppointmentHistory = () => {
         }
     }, [datosRdxUser])
 
+    const [editId, setEditId] = useState({
+        idAppointmentDelete: ''
+    })
+
 
     const [editDate, setEditDate] = useState({
         id: '',
@@ -36,6 +40,14 @@ export const AppointmentHistory = () => {
         idError: '',
         dateError: ''
     })
+
+    const functionPepe = (e) => {
+        setEditId((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
 
     const functionHandler = (e) => {
         setEditDate((prevState) => ({
@@ -90,15 +102,11 @@ export const AppointmentHistory = () => {
 
     const deleteIdAppointment = async () => {
         try {
-            console.log(token);
-            const id = { id: editDate.id }
-            const body = parseInt(id)
-            const response = await deleteAppointment(token, body)
+            const id = editId.idAppointmentDelete
+            const response = await deleteAppointment(token, id)
 
-            if (response.data.success) {
-                setAppointments(prevAppointments =>
-                    prevAppointments.filter(appointment => appointment.id !== appointmentIdToDelete)
-                )
+            if (response.status == 200) {
+                navigate('/profile')
             }
 
         } catch (error) {
@@ -114,15 +122,9 @@ export const AppointmentHistory = () => {
                 id: editDate.id,
                 date: dateBody
             }
-
             const response = await updateAppointment(token, body)
-
-            if (response.data.success) {
-                setAppointments(prevAppointments =>
-                    prevAppointments.map(appointment =>
-                        appointment.id === editDate.id ? { ...appointment, date: editDate.date } : appointment
-                    )
-                )
+            if (response.status == 200) {
+                navigate('/profile')
             }
 
         } catch (error) {
@@ -136,7 +138,6 @@ export const AppointmentHistory = () => {
             <div className="appointmentClientSpaceDesign">
                 <div className="modifyAppointmentDesign">
                     <div className="auxiliarButtons">
-                        <div className="auxOne" onClick={updateDate} >Update Appointment</div>
                         <div>
                             <CustomInput
                                 disabled={false}
@@ -154,6 +155,18 @@ export const AppointmentHistory = () => {
                                 name="id"
                                 placeholder="Id"
                                 functionProp={functionHandler}
+                                functionBlur={errorCheck}
+                            />
+                        </div>
+                        <div className="auxOne" onClick={updateDate} >Update Appointment</div>
+                        <div>
+                            <CustomInput
+                                disabled={false}
+                                design="inputDesign"
+                                type="int"
+                                name="idAppointmentDelete"
+                                placeholder="Id to delete"
+                                functionProp={functionPepe}
                                 functionBlur={errorCheck}
                             />
                         </div>
