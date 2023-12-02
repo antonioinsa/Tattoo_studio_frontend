@@ -19,6 +19,7 @@
     <li><a href="#sobre-el-proyecto-🔎">Sobre el proyecto</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#instalación-en-local">Instalación</a></li>
+    <li><a href="#animaciones">Animaciones</a></li>
     <li><a href="#vistas">Vistas</a></li>
     <li><a href="#futuras-funcionalidadesmejoras">Futuras funcionalidades\mejoras</a></li>
     <li><a href="#licencia">Licencia</a></li>
@@ -51,8 +52,48 @@ Por parte del SuperAdmin, se puede consultar todas las citas tomadas por los cli
 2. ` $ npm install `
 3. ``` $ npm run dev ```
 
-## Vistas
+## Animaciones
 
+<div style="text-align: center;">
+  <div style="display: inline-block; margin:3em;">
+    <img src="../src/Images/homeTattoArtist.gif" alt="Role superAdmin" width="320" height="240">
+    <figcaption>Home</figcaption>
+  </div>
+  
+  <div style="display: inline-block; margin: 3em;">
+    <img src="../src/Images/registerLogin.gif" alt="Role superAdmin" width="320" height="240">
+    <figcaption>Register and Login clients</figcaption>
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <div style="display: inline-block; margin: 3em;">
+    <img src="../src/Images/workers.gif" alt="Role superAdmin" width="320" height="240">
+    <figcaption>Login workers and update price appointment</figcaption>
+  </div>
+  
+  <div style="display: inline-block; margin: 3em;">
+    <img src="../src/Images/superAdmin.gif" alt="Role superAdmin" width="320" height="240">
+    <figcaption>SuperAdmin profile</figcaption>
+  </div>
+</div>
+
+<script>
+  function playGif(id) {
+    var gif = document.getElementById(id);
+    gif.play();
+  }
+
+  function pauseGif(id) {
+    var gif = document.getElementById(id);
+    gif.pause();
+    gif.currentTime = 0;
+  }
+</script>
+
+
+## Vistas
+<br></br>
 <h4>Home
 <div>
 <p align="center">
