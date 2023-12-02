@@ -41,14 +41,6 @@ export const AppointmentHistory = () => {
         dateError: ''
     })
 
-    const functionPepe = (e) => {
-        setEditId((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
-    }
-
-
     const functionHandler = (e) => {
         setEditDate((prevState) => ({
             ...prevState,
@@ -105,6 +97,7 @@ export const AppointmentHistory = () => {
             const id = editId.idAppointmentDelete
             const response = await deleteAppointment(token, id)
 
+
             if (response.status == 200) {
                 navigate('/profile')
             }
@@ -117,6 +110,7 @@ export const AppointmentHistory = () => {
 
     const updateDate = async () => {
         try {
+            const id = editId.idAppointmentDelete
             const dateBody = dayjs(editDate.date, "'{AAAA} MM-DDTHH:mm:ss SSS [Z] A'");
             const body = {
                 id: editDate.id,
@@ -160,15 +154,6 @@ export const AppointmentHistory = () => {
                         </div>
                         <div className="auxOne" onClick={updateDate} >Update Appointment</div>
                         <div>
-                            <CustomInput
-                                disabled={false}
-                                design="inputDesign"
-                                type="int"
-                                name="idAppointmentDelete"
-                                placeholder="Id to delete"
-                                functionProp={functionPepe}
-                                functionBlur={errorCheck}
-                            />
                         </div>
                         <div className="auxTwo" onClick={deleteIdAppointment}>Delete Appointment</div>
                         <div className='errorMsg'>{msgError}</div>
