@@ -20,7 +20,7 @@
     <li><a href="#stack">Stack</a></li>
     <li><a href="#instalación-en-local">Instalación</a></li>
     <li><a href="#vistas">Vistas</a></li>
-    <li><a href="#futuras-funcionalidades">Futuras funcionalidades</a></li>
+    <li><a href="#futuras-funcionalidadesmejoras">Futuras funcionalidades\mejoras</a></li>
     <li><a href="#licencia">Licencia</a></li>
   </ol>
 </details>
@@ -52,44 +52,67 @@ Por parte del SuperAdmin, se puede consultar todas las citas tomadas por los cli
 3. ``` $ npm run dev ```
 
 ## Vistas
-Home
-<img src="./Images/Home.png">  
-Tattoo artist 
-<img src="./Images/Tattoo_artist.png">
-Tattoo galery 
-<img src="./Images/Tattoo_galery.png">
-Login
-<img src="./Images/Login.png">
-Login Workers
-<img src="./Images/Login_Workers.png" width=40%>
-Register
-<img src="./Images/Register.png" width=40%>
-Profile (client)
-<img src="./Images/Client_profile.png">
-Create appoinment 
-<img src="./Images/Create_appointment.png">
-Update date appointment 
-<img src="./Images/Client_appointment_inputDate.png">
-Edit profile client
-<div>
-<img src="./Images/Client_update.png" width=40%>
-<img src="./Images/Client_update_enable.png" width=40%>
-</div>
-Profile (worker)
-<img src="./Images/Worker_profile.png">
-Profile (superAdmin)
-<img src="./Images/SuperAdmin_profile.png">
-SuperAdmin can view all clients 
-<img src="./Images/SuperAdmin_allClients.png">
 
-## Futuras funcionalidades
-✅ Al hacer clic en cada tatuador, se deben mostrar sus trabajos.
+<h4>Home
+<div>
+<p align="center">
+<img src="./Images/Home.png" width=50%> 
+</div> 
+
+Login
+<div>
+<p align="center">
+<img src="./Images/Login.png" width=50%>
+</div>
+
+Profile (client)
+<div>
+<p align="center">
+<img src="./Images/Client_profile.png" width=50%>
+</div>
+
+Edit profile (client)
+<div>
+<p align="center">
+<img src="./Images/Client_update.png" width=20%>
+<img src="./Images/Client_update_enable.png" width=20%>
+</div>
+
+Profile (worker)
+<div>
+<p align="center">
+<img src="./Images/Worker_profile.png" width=50%>
+</div>
+
+Profile (superAdmin)
+<div>
+<p align="center">
+<img src="./Images/SuperAdmin_profile.png" width=50%>
+</div>
+
+SuperAdmin can view all clients 
+<div>
+<p align="center">
+<img src="./Images/superAdmin_allClients.png" width=50%>
+</div>
+
+SuperAdmin can view all appointments 
+<div>
+<p align="center">
+<img src="./Images/superAdmin_allAppointments.png" width=50%>
+</div>
+</h4>
+
+## Futuras funcionalidades\mejoras
+✅ Al hacer clic en cada tatuador, se deben mostrar unicamente sus propios trabajos.
 
 ✅ Filtrar por tipo de intervención.
 
 ✅ Aplicar mayor seguridad.
 
-✅ Insertar mensajes de error en la base de datos para que sean más precisos.
+✅ Insertar mensajes de error provenientes de la repuesta del backend para mayor detalle.
+
+✅ Eliminación del input de ID a la hora de actualizar las citas, para unicamente seleccionar fecha y hacer click en update appointment.
 
 
 ## Licencia
